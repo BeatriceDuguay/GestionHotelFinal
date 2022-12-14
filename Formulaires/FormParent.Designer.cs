@@ -137,7 +137,6 @@
             this.afficherToolStripMenuItem.Name = "afficherToolStripMenuItem";
             this.afficherToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
             this.afficherToolStripMenuItem.Text = "Afficher";
-            this.afficherToolStripMenuItem.Click += new System.EventHandler(this.afficherToolStripMenuItem_Click);
             // 
             // quitterToolStripMenuItem
             // 
@@ -240,7 +239,6 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormParent";
             this.Text = "Gestion de l\'hôtel";
-            this.Activated += new System.EventHandler(this.FormParent_Activated);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.MdiChildActivate += new System.EventHandler(this.Form1_Load);
             this.menuStrip.ResumeLayout(false);
