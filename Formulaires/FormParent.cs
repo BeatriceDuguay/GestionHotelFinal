@@ -31,11 +31,25 @@ namespace GestionHotel
             ListeEmployes.Add(new Employe("3333", "pw3", "Gérant"));
             ListeEmployes.Add(new Employe("4444", "pw4", "Gérant"));
 
+            // Ajouter des clients à la liste des clients pour les tests
+            StatistiquesHotel.ListeClients.Add(new Client("11111", "Hasna", "Hocini", DateTime.MinValue, "8191111111"));
+            StatistiquesHotel.ListeClients.Add(new Client("22222", "Arno", "Ménard", DateTime.MinValue, "8192222222"));
+            StatistiquesHotel.ListeClients.Add(new Client("33333", "Mylène", "Ménard", DateTime.MinValue, "8193333333"));
+            StatistiquesHotel.ListeClients.Add(new Client("44444", "Mario", "Duguay", DateTime.MinValue, "8194444444"));
+
+            // Ajouter des espaces à la liste des espaces pour les tests
+            StatistiquesHotel.ListeEspaceLoue.Add(new Chambre("111111", 2, 0, "Chambre", "Oui"));
+            StatistiquesHotel.ListeEspaceLoue.Add(new Chambre("222222", 1, 0, "Chambre", "Non"));
+            StatistiquesHotel.ListeEspaceLoue.Add(new Suite("333333", 3, 0, "Suite", 3));
+            StatistiquesHotel.ListeEspaceLoue.Add(new Suite("444444", 2, 0, "Suite", 2));
+
+            // Rendre les ToolStripMenuItem inaccessible avant la connexion
             clientToolStripMenuItem.Enabled = false;
             locationToolStripMenuItem.Enabled = false;
             chambreToolStripMenuItem.Enabled = false;
             statistiquesToolStripMenuItem.Enabled = false;  
 
+            // Rendre les Label, TextBox et Buttons de connexion invisibles
             lblNumEmploye.Visible = false;
             txtNumEmploye.Visible = false;
             lblErreurNumEmploye.Visible = false;

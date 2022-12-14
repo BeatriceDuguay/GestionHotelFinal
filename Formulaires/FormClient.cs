@@ -28,11 +28,6 @@ namespace GestionHotel.Formulaires
             // Modifier le format du DateTimePicker
             dtDateNaissance.Format = DateTimePickerFormat.Custom;
             dtDateNaissance.CustomFormat = "dd MMMM yyyy";
-            // Ajouter des clients à la liste des clients pour les tests
-            StatistiquesHotel.ListeClients.Add(new Client("11111", "Hasna", "Hocini", DateTime.MinValue, "8191111111"));
-            StatistiquesHotel.ListeClients.Add(new Client("22222", "Arno", "Ménard", DateTime.MinValue, "8192222222"));
-            StatistiquesHotel.ListeClients.Add(new Client("33333", "Mylène", "Ménard", DateTime.MinValue, "8193333333"));
-            StatistiquesHotel.ListeClients.Add(new Client("44444", "Mario", "Duguay", DateTime.MinValue, "8194444444"));
         }
 
         // Méthode InitialiserLabel()

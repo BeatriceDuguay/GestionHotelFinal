@@ -27,11 +27,6 @@ namespace GestionHotel.Formulaires
             numericNbChambres.Visible = false;
             radioBtnOui.Visible = false;
             radioBtnNon.Visible = false;
-            // Ajouter des espaces à la liste des espaces pour les tests
-            StatistiquesHotel.ListeEspaceLoue.Add(new Chambre("111111", 2, 0, "Chambre", "Oui"));
-            StatistiquesHotel.ListeEspaceLoue.Add(new Chambre("222222", 1, 0, "Chambre", "Non"));
-            StatistiquesHotel.ListeEspaceLoue.Add(new Suite("333333", 3, 0, "Suite", 3));
-            StatistiquesHotel.ListeEspaceLoue.Add(new Suite("444444", 2, 0, "Suite", 2));
         }
 
         // Méthode InitialiserLabel()
