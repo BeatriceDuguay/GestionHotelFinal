@@ -40,12 +40,12 @@
             this.afficherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnConnexion = new System.Windows.Forms.Button();
-            this.lblErreurNumEmploye = new System.Windows.Forms.Label();
             this.lblErreurMdp = new System.Windows.Forms.Label();
             this.txtNumEmploye = new System.Windows.Forms.TextBox();
             this.lblNumEmploye = new System.Windows.Forms.Label();
             this.txtMdp = new System.Windows.Forms.TextBox();
             this.lblMdp = new System.Windows.Forms.Label();
+            this.lblErreurNumEmploye = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -157,19 +157,10 @@
             this.btnConnexion.UseVisualStyleBackColor = true;
             this.btnConnexion.Click += new System.EventHandler(this.btnConnexion_Click);
             // 
-            // lblErreurNumEmploye
-            // 
-            this.lblErreurNumEmploye.AutoSize = true;
-            this.lblErreurNumEmploye.Font = new System.Drawing.Font("Yu Gothic Medium", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblErreurNumEmploye.Location = new System.Drawing.Point(382, 204);
-            this.lblErreurNumEmploye.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblErreurNumEmploye.Name = "lblErreurNumEmploye";
-            this.lblErreurNumEmploye.Size = new System.Drawing.Size(0, 19);
-            this.lblErreurNumEmploye.TabIndex = 68;
-            // 
             // lblErreurMdp
             // 
             this.lblErreurMdp.AutoSize = true;
+            this.lblErreurMdp.BackColor = System.Drawing.Color.Transparent;
             this.lblErreurMdp.Font = new System.Drawing.Font("Yu Gothic Medium", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblErreurMdp.Location = new System.Drawing.Point(382, 274);
             this.lblErreurMdp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -219,6 +210,17 @@
             this.lblMdp.TabIndex = 63;
             this.lblMdp.Text = "Mot de passe";
             // 
+            // lblErreurNumEmploye
+            // 
+            this.lblErreurNumEmploye.AutoSize = true;
+            this.lblErreurNumEmploye.BackColor = System.Drawing.Color.Transparent;
+            this.lblErreurNumEmploye.Font = new System.Drawing.Font("Yu Gothic Medium", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblErreurNumEmploye.Location = new System.Drawing.Point(382, 204);
+            this.lblErreurNumEmploye.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblErreurNumEmploye.Name = "lblErreurNumEmploye";
+            this.lblErreurNumEmploye.Size = new System.Drawing.Size(0, 19);
+            this.lblErreurNumEmploye.TabIndex = 68;
+            // 
             // FormParent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -262,12 +264,12 @@
         public System.Windows.Forms.ToolStripMenuItem chambreToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem statistiquesToolStripMenuItem;
         private System.Windows.Forms.Button btnConnexion;
-        private System.Windows.Forms.Label lblErreurNumEmploye;
         private System.Windows.Forms.Label lblErreurMdp;
         private System.Windows.Forms.TextBox txtNumEmploye;
         private System.Windows.Forms.Label lblNumEmploye;
         private System.Windows.Forms.TextBox txtMdp;
         private System.Windows.Forms.Label lblMdp;
+        private System.Windows.Forms.Label lblErreurNumEmploye;
     }
 }
 

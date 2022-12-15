@@ -155,7 +155,7 @@ namespace GestionHotel.Formulaires
                     return true; // Retourner true 
                 }
             }
-            MessageBox.Show("Le client n'existe pas. ", "Message"); // Afficher un message d'erreur
+            MessageBox.Show("Le client ou l'espace n'existe pas. ", "Message"); // Afficher un message d'erreur
             return false; // Retourner false si le client n'est pas dans la liste
         }
 
@@ -179,14 +179,14 @@ namespace GestionHotel.Formulaires
                     return true; // Retourner true 
                 }
             }
-            MessageBox.Show("L'espace n'existe pas. ", "Message"); // Afficher un message d'erreur
+            MessageBox.Show("Le client ou l'espace n'existe pas. ", "Message"); // Afficher un message d'erreur
             return false; // Retourner false si l'espace n'est pas dans la liste
         }
 
         private void btnAjouterLoc_Click(object sender, EventArgs e)
         {
             // Si les méthodes VerifierTous, VerifierNumClient et VerifierNumEspace retournent true
-            if (VerifierTous() && VerifierNumClient() && VerifierNumEspace()) 
+            if (VerifierTous()) 
             {
                 // Parcourir la liste des clients
                 foreach (Client elt in StatistiquesHotel.ListeClients)
@@ -212,13 +212,86 @@ namespace GestionHotel.Formulaires
                                 // Appel de la méthode InitialiserLabel
                                 InitialiserLabel();
                                 // Appel de la méthode DureeSejour
-                                int dureeSejour = location.DureeSejour(dtDebutLocation, dtFinLocation);
+                                var dureeSejour = location.DureeSejour(dtDebutLocation, dtFinLocation);
                                 // Afficher les informations de la chambre dans une boîte de message
                                 MessageBox.Show(location.AfficherLocation() + "\n" + 
                                                 "Durée séjour : " + dureeSejour.ToString() + "\n" + "\n" +
                                                 elt.AfficherClient() + "\n" + "\n" + 
                                                 elt1.AfficherEspace(), "Location ajoutée");
-                                break; // Arrêter de parcourir les listes
+                                break; // Arrêter de parcourir la liste
+                            }
+                            break; // Arrêter de parcourir la liste
+                        }
+                    }
+                }
+            }
+        }
+
+        // Méthode VerifierNumLoc()
+        /// <summary>
+        /// Vérifie que la location entrée par l'utilisateur se trouve dans la liste des locations
+        /// </summary>
+        /// <returns>
+        ///     true si la location se trouve dans la liste
+        ///     false si la location ne se trouve pas dans la liste
+        /// </returns>
+        // Code de Hasna Hocini (GestElection)
+        public bool VerifierNumLocPresent()
+        {
+            // Parcourir la liste des locations
+            foreach (Location location in StatistiquesHotel.ListeLocations)
+            {
+                // Si le numéro de la location entré par l'utilisateur est le même que celui dans la liste
+                if (location.NumeroLocation == txtNumLocation.Text)
+                {
+                    return true; // Retourner true 
+                }
+            }
+            MessageBox.Show("La location existe déjà. ", "Message"); // Afficher un message d'erreur
+            return true; // Retourner true si la location n'est pas dans la liste
+        }
+
+        private void btnModifierLoc_Click(object sender, EventArgs e)
+        {
+            // Si les méthodes VerifierTous, VerifierNumClient et VerifierNumEspace retournent true
+            if (VerifierTous())
+            {
+                // Parcourir la liste des locations
+                foreach (Location elt in StatistiquesHotel.ListeLocations.ToList())
+                {
+                    // Si le numéro de la location entré par l'utilisateur existe dans la liste
+                    if (elt.NumeroLocation == txtNumLocation.Text)
+                    {
+                        // Parcourir la liste des clients
+                        foreach (Client elt1 in StatistiquesHotel.ListeClients)
+                        {
+                            // Parcourir la liste des espaces
+                            foreach (EspaceLoue elt2 in StatistiquesHotel.ListeEspaceLoue)
+                            {
+                                // Si le numéro du client et le numéro de l'espace entrés par l'utilisateur sont les mêmes que ceux dans la liste
+                                if (elt1.NumeroClient == txtNumClient.Text & elt2.NumeroEspace == txtNumEspace.Text)
+                                {
+                                    // Supprimer l'élément de la liste 
+                                    StatistiquesHotel.ListeLocations.Remove(elt);
+                                    // Instancier un objet Location avec les champs entrés par l'utilisateur
+                                    Location location = new Location(txtNumLocation.Text, dtDebutLocation.Value.Date,
+                                                                     dtFinLocation.Value.Date, (int)numericNbAdultes.Value,
+                                                                     (int)numericNbEnfants.Value, elt1, elt2);
+                                    // Ajouter la nouvelle location à la liste des locations de la classe statique StatistiquesHotel
+                                    StatistiquesHotel.ListeLocations.Add(location);
+                                    // Appel de la méthode InitialiserControles
+                                    InitialiserControles();
+                                    // Appel de la méthode InitialiserLabel
+                                    InitialiserLabel();
+                                    // Appel de la méthode DureeSejour
+                                    var dureeSejour = location.DureeSejour(dtDebutLocation, dtFinLocation);
+                                    // Afficher les nouvelles informations de la chambre dans une boîte de message
+                                    MessageBox.Show(location.AfficherLocation() + "\n" +
+                                                    "Durée séjour : " + dureeSejour.ToString() + "\n" + "\n" +
+                                                    elt1.AfficherClient() + "\n" + "\n" +
+                                                    elt2.AfficherEspace(), "Location ajoutée");
+                                    break; // Arrêter de parcourir les listes
+                                }
                             }
                         }
                     }
@@ -226,14 +299,25 @@ namespace GestionHotel.Formulaires
             }
         }
 
-        private void btnModifierLoc_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnSupprimerLoc_Click(object sender, EventArgs e)
         {
+            // Parcourir la liste des locations
+            foreach (Location elt in StatistiquesHotel.ListeLocations.ToList())
+            {
+                // Si le numéro de la location entrée par l'utilisateur se trouve dans la liste 
+                if (elt.NumeroLocation == txtNumLocation.Text) 
+                {
+                    StatistiquesHotel.ListeLocations.Remove(elt); // Supprimer la location de la liste
+                    // Appel de la méthode InitialiserControles
+                    InitialiserControles();
+                    // Appel de la méthode InitialiserLabel
+                    InitialiserLabel();
+                    // Afficher les nouvelles informations de la chambre dans une boîte de message
+                    MessageBox.Show("La location a bien été supprimée.", "Location supprimée");
 
+                }
+                MessageBox.Show("La location n'existe pas.", "Message"); // Afficher un message d'erreur
+            } 
         }
     }
 }
