@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 // Numéro étudiant : 1724602
 // Nom : Béatrice Duguay
@@ -72,6 +73,25 @@ namespace GestionHotel.Classes
                 }
             }
             return cpt; // Retourner le nombre de clients par type d'espace
+        }
+
+        public static int LocationParDate(string typeEspace, DateTimePicker dtPickerDate)
+        {
+            int cpt = 0;
+
+            foreach (Location elt in ListeLocations)
+            {
+                if (typeEspace == elt.EspaceLoue.TypeEspace & dtPickerDate.Value >= elt.DateDebutLocation & dtPickerDate.Value <= elt.DateFinLocation)
+                {
+                    cpt++;
+                }
+
+                else if (typeEspace == "Tous" & dtPickerDate.Value >= elt.DateDebutLocation & dtPickerDate.Value <= elt.DateFinLocation)
+                {
+                    cpt++;  
+                }
+            }
+            return cpt++;
         }
     }
 }

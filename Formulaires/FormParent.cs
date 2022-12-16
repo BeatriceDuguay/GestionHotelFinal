@@ -235,7 +235,6 @@ namespace GestionHotel
                     else
                     {
                         lblErreurMdp.ForeColor = Color.Red; lblErreurMdp.Text = " Numéro d'employé ou mot de passe invalide. "; // Afficher un message d'erreur
-                        break; // Arrêter de parcourir la liste
                     }
                 }
             }
