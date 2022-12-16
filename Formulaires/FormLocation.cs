@@ -377,7 +377,10 @@ namespace GestionHotel.Formulaires
                 // Si le numéro de la location entrée par l'utilisateur se trouve dans la liste 
                 if (elt.NumeroLocation == txtNumLocation.Text)
                 {
-                    MessageBox.Show("Nombre de jours : " + elt.Duree, "Consulter");
+                    int nbPersonnes = elt.NombreEnfants + elt.NombreAdultes; // Calculer le nombre de personnes dans la location
+                    // Afficher les statistiques de la location
+                    MessageBox.Show("Nombre de jours : " + elt.Duree + "\n" +
+                                    "Nombre de personnes : " + nbPersonnes.ToString(), "Consulter la location");
                 }
 
                 else
