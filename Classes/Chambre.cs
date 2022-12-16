@@ -41,7 +41,9 @@ namespace GestionHotel.Classes
         /// </summary>
         /// <param name="pNbLits"></param>
         /// <param name="pPrix"></param>
-        /// <returns> Le prix de la chambre </returns>
+        /// <returns>
+        ///     Le prix de la chambre 
+        /// </returns>
         public override int CalculerPrix(int pNbLits, int pPrix)
         {
             // Prix fixe de la chambre (50) mulitplier par le nombre de lits
@@ -52,9 +54,11 @@ namespace GestionHotel.Classes
 
         // Méthode AfficherChambre()
         /// <summary>
-        /// Affiche toutes les information de la chambre 
+        /// Affiche toutes les informations de la chambre 
         /// </summary>
-        /// <return> Retourne les information de la chambre en String </return>
+        /// <return> 
+        ///     Les informations de la chambre en String 
+        /// </return>
         public string AfficherChambre()
         {
             return

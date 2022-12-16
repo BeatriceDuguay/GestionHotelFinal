@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// Numéro étudiant : 1724602
+// Nom : Béatrice Duguay
+
 namespace GestionHotel.Classes
 {
     public abstract class EspaceLoue
@@ -65,9 +68,11 @@ namespace GestionHotel.Classes
 
         // Méthode AfficherEspace()
         /// <summary>
-        /// Affiche toutes les information de l'espace 
+        /// Affiche toutes les informations de l'espace 
         /// </summary>
-        /// <return> Retourne les information de l'espace en String </return>
+        /// <return> 
+        ///     Retourne les informations de l'espace en String 
+        /// </return>
         public string AfficherEspace()
         {
             return
@@ -75,7 +80,6 @@ namespace GestionHotel.Classes
                 "Type d'espace : " + this.TypeEspace + "\n" +
                 "Nombre de lits : " + this.NombreLits.ToString() + "\n" +
                 "Prix : " + this.Prix.ToString();
-
         }
     }
 

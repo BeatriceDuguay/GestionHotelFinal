@@ -90,9 +90,11 @@ namespace GestionHotel.Classes
 
         // Méthode AfficherClient()
         /// <summary>
-        /// Affiche toutes les information du client 
+        /// Affiche toutes les informations du client 
         /// </summary>
-        /// <return> Retourne les information du client en String </return>
+        /// <return> 
+        ///     Les informations du client en String 
+        /// </return>
         public string AfficherClient()
         {
             return

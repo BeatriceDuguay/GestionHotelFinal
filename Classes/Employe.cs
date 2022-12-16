@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// Numéro étudiant : 1724602
+// Nom : Béatrice Duguay
+
 namespace GestionHotel.Classes
 {
     internal class Employe

@@ -94,22 +94,34 @@ namespace GestionHotel.Classes
             this.espaceLoue = pEspace;
         }
 
+        // Méthode DureeSejour()
+        /// <summary>
+        /// Calcule le nombre de jours entre deux DateTimePicker
+        /// </summary>
+        /// <param name="dtPickerDebut" le premier DateTimePicker></param>
+        /// <param name="dtPickerFin" le deuxième DateTimePicker></param>
+        /// <returns>
+        ///     Le nombre de jours
+        /// </returns>
+        // Code de : https://www.youtube.com/watch?v=3UlFLyWG-ik
         public int DureeSejour(DateTimePicker dtPickerDebut, DateTimePicker dtPickerFin)
         {
-            DateTime debutSejour = dtPickerDebut.Value;
-            DateTime finSejour = dtPickerFin.Value;
+            DateTime debutSejour = dtPickerDebut.Value; // Créer une variable pour le DateTimePicker du début
+            DateTime finSejour = dtPickerFin.Value; // Créer une variable pour le DateTimePicker de la fin
 
-            TimeSpan jours = finSejour.Subtract(debutSejour);
+            TimeSpan jours = finSejour.Subtract(debutSejour); // Soustraire la date du début à la date de la fin
 
             return
-                jours.Days;
+                jours.Days; // Retourner le nombre de jours
         }
 
         // Méthode AfficherLocation()
         /// <summary>
-        /// Affiche toutes les information de la location 
+        /// Affiche toutes les informations de la location 
         /// </summary>
-        /// <return> Retourne les information de la location en String </return>
+        /// <return> 
+        ///     Les informations de la location en String 
+        /// </return>
         public string AfficherLocation()
         {
             return

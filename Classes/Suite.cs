@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// Numéro étudiant : 1724602
+// Nom : Béatrice Duguay
+
 namespace GestionHotel.Classes
 {
     public class Suite : EspaceLoue
@@ -48,9 +51,11 @@ namespace GestionHotel.Classes
 
         // Méthode AfficherSuite()
         /// <summary>
-        /// Affiche toutes les information de la suite 
+        /// Affiche toutes les informations de la suite 
         /// </summary>
-        /// <return> Retourne les information de la suite en String </return>
+        /// <return> 
+        ///     Les informations de la suite en String 
+        /// </return>
         public string AfficherSuite()
         {
             return
