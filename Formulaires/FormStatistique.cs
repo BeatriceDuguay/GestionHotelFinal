@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+// Numéro étudiant : 1724602
+// Nom : Béatrice Duguay
+
 namespace GestionHotel.Formulaires
 {
     public partial class FormStatistique : Form
@@ -15,6 +18,11 @@ namespace GestionHotel.Formulaires
         public FormStatistique()
         {
             InitializeComponent();
+        }
+
+        private void FormStatistique_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

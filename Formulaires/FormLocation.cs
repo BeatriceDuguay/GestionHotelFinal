@@ -11,6 +11,9 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+// Numéro étudiant : 1724602
+// Nom : Béatrice Duguay
+
 namespace GestionHotel.Formulaires
 {
     public partial class FormLocation : Form
@@ -22,7 +25,7 @@ namespace GestionHotel.Formulaires
 
         private void FormLocation_Load(object sender, EventArgs e)
         {
-            // Modifier le format des DateTimePicker ghhhhh
+            // Modifier le format des DateTimePicker 
             dtDebutLocation.Format = DateTimePickerFormat.Custom;
             dtDebutLocation.CustomFormat = "dd MMMM yyyy";
             dtFinLocation.Format = DateTimePickerFormat.Custom;
@@ -100,13 +103,15 @@ namespace GestionHotel.Formulaires
         public bool VerifierTous()
         {
             // Déclaration des booléens de validation des informations entrées
-            bool b_numLoc, b_numClient, b_numChambre;
+            bool b_numLoc, b_numClient, b_numChambre, b_duree;
             // Appel de la méthode VerifierRegex pour tous les champs et récupération des valeurs retournées dans les variables bouléennes
             b_numClient = VerifierRegex("^[0-9]{5}$", txtNumClient, lblErreurNumClient, "Cinq chiffres");
             b_numChambre = VerifierRegex("^[0-9]{6}$", txtNumEspace, lblErreurNumEspace, "Six chiffres");
             b_numLoc = VerifierRegex("^[0-9]{7}$", txtNumLocation, lblErreurNumLocation, "Sept chiffres");
+            // Appel de la métode VerifierDuree pour vérifier la durée de la location
+            b_duree = VerifierDuree(lblErreurFinLoc);
             // Si toutes les vérifications sont valides retourner vrai
-            if (b_numLoc && b_numClient && b_numChambre)
+            if (b_numLoc && b_numClient && b_numChambre && b_duree)
                 return true; // Retourner true
             else return false; // Sinon retourner false
         }
@@ -183,6 +188,31 @@ namespace GestionHotel.Formulaires
             return false; // Retourner false si l'espace n'est pas dans la liste
         }
 
+        // Méthode VerifierDuree()
+        /// <summary>
+        /// Vérifie que la durée de la location est de 1 jour et plus, mais de 28 jours maximum
+        /// </summary>
+        /// <param name="lb" le Label du formulaire></param>
+        /// <returns>
+        ///     true si la location est d'une durée minimale de 1 jour et maximal de 28 jours
+        ///     false si la location n'est pas d'une durée minimale de 1 jour et maximal de 28 jours
+        /// </returns>
+        public bool VerifierDuree(Label lb)
+        {
+            Location test = new Location();
+            if (test.DureeSejour(dtDebutLocation, dtFinLocation) >= 1 & test.DureeSejour(dtDebutLocation, dtFinLocation) <= 28)
+            {
+                return true;
+            }
+
+            else
+            {
+                lb.ForeColor = Color.Red;
+                lb.Text = "1 jour minimum et 28 jours maximum";
+                return false;
+            }
+        }
+
         private void btnAjouterLoc_Click(object sender, EventArgs e)
         {
             // Si les méthodes VerifierTous, VerifierNumClient et VerifierNumEspace retournent true
@@ -197,9 +227,13 @@ namespace GestionHotel.Formulaires
                         // Si le numéro du client et le numéro de l'espace entrés par l'utilisateur sont les mêmes que ceux dans la liste
                         if (elt.NumeroClient == txtNumClient.Text & elt1.NumeroEspace == txtNumEspace.Text)
                         {
+                            // Instancier un objet test Location pour accéder à la méthode DureeSejour
+                            Location test = new Location();
+                            // Appel de la méthode DureeSejour
+                            int dureeSejour = test.DureeSejour(dtDebutLocation, dtFinLocation);
                             // Instancier un objet Location avec les champs entrés par l'utilisateur
                             Location location = new Location(txtNumLocation.Text, dtDebutLocation.Value.Date,
-                                                             dtFinLocation.Value.Date, (int)numericNbAdultes.Value,
+                                                             dtFinLocation.Value.Date, dureeSejour, (int)numericNbAdultes.Value,
                                                              (int)numericNbEnfants.Value, elt, elt1);
 
                             // Si la méthode VerifierNumLoc retourne true
@@ -207,17 +241,14 @@ namespace GestionHotel.Formulaires
                             {
                                 // Ajouter la nouvelle location à la liste des locations de la classe statique StatistiquesHotel
                                 StatistiquesHotel.ListeLocations.Add(location);
+                                // Afficher les informations de la chambre dans une boîte de message
+                                MessageBox.Show(location.AfficherLocation() + "\n" + 
+                                                elt.AfficherClient() + "\n" + "\n" + 
+                                                elt1.AfficherEspace(), "Location ajoutée");
                                 // Appel de la méthode InitialiserControles
                                 InitialiserControles();
                                 // Appel de la méthode InitialiserLabel
                                 InitialiserLabel();
-                                // Appel de la méthode DureeSejour
-                                var dureeSejour = location.DureeSejour(dtDebutLocation, dtFinLocation);
-                                // Afficher les informations de la chambre dans une boîte de message
-                                MessageBox.Show(location.AfficherLocation() + "\n" + 
-                                                "Durée séjour : " + dureeSejour.ToString() + "\n" + "\n" +
-                                                elt.AfficherClient() + "\n" + "\n" + 
-                                                elt1.AfficherEspace(), "Location ajoutée");
                                 break; // Arrêter de parcourir la liste
                             }
                             break; // Arrêter de parcourir la liste
@@ -271,11 +302,15 @@ namespace GestionHotel.Formulaires
                                 // Si le numéro du client et le numéro de l'espace entrés par l'utilisateur sont les mêmes que ceux dans la liste
                                 if (elt1.NumeroClient == txtNumClient.Text & elt2.NumeroEspace == txtNumEspace.Text)
                                 {
+                                    // Instancier un objet test Location pour accéder à la méthode DureeSejour
+                                    Location test = new Location();
+                                    // Appel de la méthode DureeSejour
+                                    int dureeSejour = test.DureeSejour(dtDebutLocation, dtFinLocation);
                                     // Supprimer l'élément de la liste 
                                     StatistiquesHotel.ListeLocations.Remove(elt);
                                     // Instancier un objet Location avec les champs entrés par l'utilisateur
                                     Location location = new Location(txtNumLocation.Text, dtDebutLocation.Value.Date,
-                                                                     dtFinLocation.Value.Date, (int)numericNbAdultes.Value,
+                                                                     dtFinLocation.Value.Date, dureeSejour, (int)numericNbAdultes.Value,
                                                                      (int)numericNbEnfants.Value, elt1, elt2);
                                     // Ajouter la nouvelle location à la liste des locations de la classe statique StatistiquesHotel
                                     StatistiquesHotel.ListeLocations.Add(location);
@@ -283,11 +318,8 @@ namespace GestionHotel.Formulaires
                                     InitialiserControles();
                                     // Appel de la méthode InitialiserLabel
                                     InitialiserLabel();
-                                    // Appel de la méthode DureeSejour
-                                    var dureeSejour = location.DureeSejour(dtDebutLocation, dtFinLocation);
                                     // Afficher les nouvelles informations de la chambre dans une boîte de message
                                     MessageBox.Show(location.AfficherLocation() + "\n" +
-                                                    "Durée séjour : " + dureeSejour.ToString() + "\n" + "\n" +
                                                     elt1.AfficherClient() + "\n" + "\n" +
                                                     elt2.AfficherEspace(), "Location ajoutée");
                                     break; // Arrêter de parcourir les listes
@@ -312,12 +344,29 @@ namespace GestionHotel.Formulaires
                     InitialiserControles();
                     // Appel de la méthode InitialiserLabel
                     InitialiserLabel();
-                    // Afficher les nouvelles informations de la chambre dans une boîte de message
+                    // Afficher un message de confirmation de suppression
                     MessageBox.Show("La location a bien été supprimée.", "Location supprimée");
 
                 }
                 MessageBox.Show("La location n'existe pas.", "Message"); // Afficher un message d'erreur
             } 
+        }
+
+        private void btnConsulterLoc_Click(object sender, EventArgs e)
+        {
+            foreach (Location elt in StatistiquesHotel.ListeLocations.ToList())
+            {
+                // Si le numéro de la location entrée par l'utilisateur se trouve dans la liste 
+                if (elt.NumeroLocation == txtNumLocation.Text)
+                {
+                    MessageBox.Show("Nombre de jours" + elt.Duree, "Consulter");
+                }
+
+                else
+                {
+                    MessageBox.Show("La location n'existe pas.", "Message"); // Afficher un message d'erreur
+                }
+            }
         }
     }
 }

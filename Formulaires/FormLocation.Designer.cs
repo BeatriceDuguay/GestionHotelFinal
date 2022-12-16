@@ -52,6 +52,7 @@
             this.btnAjouterLoc = new System.Windows.Forms.Button();
             this.btnSupprimerLoc = new System.Windows.Forms.Button();
             this.lblErreurNumLocation = new System.Windows.Forms.Label();
+            this.btnConsulterLoc = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericNbAdultes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericNbEnfants)).BeginInit();
             this.SuspendLayout();
@@ -283,10 +284,10 @@
             // btnModifierLoc
             // 
             this.btnModifierLoc.Font = new System.Drawing.Font("Yu Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModifierLoc.Location = new System.Drawing.Point(297, 585);
+            this.btnModifierLoc.Location = new System.Drawing.Point(236, 585);
             this.btnModifierLoc.Margin = new System.Windows.Forms.Padding(4);
             this.btnModifierLoc.Name = "btnModifierLoc";
-            this.btnModifierLoc.Size = new System.Drawing.Size(208, 28);
+            this.btnModifierLoc.Size = new System.Drawing.Size(146, 28);
             this.btnModifierLoc.TabIndex = 41;
             this.btnModifierLoc.Text = "Modifier";
             this.btnModifierLoc.UseVisualStyleBackColor = true;
@@ -298,7 +299,7 @@
             this.btnAjouterLoc.Location = new System.Drawing.Point(52, 585);
             this.btnAjouterLoc.Margin = new System.Windows.Forms.Padding(4);
             this.btnAjouterLoc.Name = "btnAjouterLoc";
-            this.btnAjouterLoc.Size = new System.Drawing.Size(208, 28);
+            this.btnAjouterLoc.Size = new System.Drawing.Size(146, 28);
             this.btnAjouterLoc.TabIndex = 40;
             this.btnAjouterLoc.Text = "Ajouter";
             this.btnAjouterLoc.UseVisualStyleBackColor = true;
@@ -307,10 +308,10 @@
             // btnSupprimerLoc
             // 
             this.btnSupprimerLoc.Font = new System.Drawing.Font("Yu Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSupprimerLoc.Location = new System.Drawing.Point(545, 585);
+            this.btnSupprimerLoc.Location = new System.Drawing.Point(419, 585);
             this.btnSupprimerLoc.Margin = new System.Windows.Forms.Padding(4);
             this.btnSupprimerLoc.Name = "btnSupprimerLoc";
-            this.btnSupprimerLoc.Size = new System.Drawing.Size(208, 28);
+            this.btnSupprimerLoc.Size = new System.Drawing.Size(146, 28);
             this.btnSupprimerLoc.TabIndex = 42;
             this.btnSupprimerLoc.Text = "Supprimer";
             this.btnSupprimerLoc.UseVisualStyleBackColor = true;
@@ -326,12 +327,25 @@
             this.lblErreurNumLocation.Size = new System.Drawing.Size(0, 19);
             this.lblErreurNumLocation.TabIndex = 55;
             // 
+            // btnConsulterLoc
+            // 
+            this.btnConsulterLoc.Font = new System.Drawing.Font("Yu Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConsulterLoc.Location = new System.Drawing.Point(604, 585);
+            this.btnConsulterLoc.Margin = new System.Windows.Forms.Padding(4);
+            this.btnConsulterLoc.Name = "btnConsulterLoc";
+            this.btnConsulterLoc.Size = new System.Drawing.Size(146, 28);
+            this.btnConsulterLoc.TabIndex = 56;
+            this.btnConsulterLoc.Text = "Consulter";
+            this.btnConsulterLoc.UseVisualStyleBackColor = true;
+            this.btnConsulterLoc.Click += new System.EventHandler(this.btnConsulterLoc_Click);
+            // 
             // FormLocation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(800, 688);
+            this.Controls.Add(this.btnConsulterLoc);
             this.Controls.Add(this.lblErreurNumLocation);
             this.Controls.Add(this.btnSupprimerLoc);
             this.Controls.Add(this.lblErreurNbEnfants);
@@ -394,5 +408,6 @@
         private System.Windows.Forms.Button btnAjouterLoc;
         private System.Windows.Forms.Button btnSupprimerLoc;
         private System.Windows.Forms.Label lblErreurNumLocation;
+        private System.Windows.Forms.Button btnConsulterLoc;
     }
 }

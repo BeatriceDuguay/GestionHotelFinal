@@ -38,9 +38,9 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cboTypeEspace = new System.Windows.Forms.ComboBox();
             this.lblTypeEspace = new System.Windows.Forms.Label();
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // btnAfficherClients
@@ -128,6 +128,11 @@
             this.columnHeader6.Text = "# Espace";
             this.columnHeader6.Width = 84;
             // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Type d\'espace";
+            this.columnHeader7.Width = 130;
+            // 
             // cboTypeEspace
             // 
             this.cboTypeEspace.Font = new System.Drawing.Font("Yu Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -149,11 +154,6 @@
             this.lblTypeEspace.TabIndex = 30;
             this.lblTypeEspace.Text = "Type d\'espace";
             // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "Type d\'espace";
-            this.columnHeader7.Width = 130;
-            // 
             // FormStatistique
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -167,6 +167,7 @@
             this.Controls.Add(this.lblTypeEspace);
             this.Name = "FormStatistique";
             this.Text = "FormStatistique";
+            this.Load += new System.EventHandler(this.FormStatistique_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

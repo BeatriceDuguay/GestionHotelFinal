@@ -89,8 +89,8 @@ namespace GestionHotel.Formulaires
 
         // Méthode VerifierAge(DateTimePicker dtpicker, System.Windows.Forms.Label lb)
         /// <summary>
-        /// Verifie si la date du DatePicker a été modifiée 
-        /// Verifie si le client a 18 et plus en appelant la méthode Age
+        /// Vérifie si la date du DatePicker a été modifiée 
+        /// Vérifie si le client a 18 et plus en appelant la méthode Age
         /// </summary>
         /// <param name="dtPicker" le DateTimePicker du formulaire></param>
         /// <param name="lb" le Label du formulaire></param>
@@ -100,7 +100,7 @@ namespace GestionHotel.Formulaires
         ///     false si le client a moins de 18 ans 
         /// </returns>
         // Code de Hasna Hocini (GestElection)
-        public bool VerifierAge(DateTimePicker dtpicker, System.Windows.Forms.Label lb)
+        public bool VerifierAge(DateTimePicker dtpicker, Label lb)
         {
             // Obtenir la difference en années entre la date d'aujourd'hui et la date de naissance entrées
             if (dtpicker.Value.Date.Year == DateTime.Now.Year &

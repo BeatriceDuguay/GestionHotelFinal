@@ -11,6 +11,9 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+// Numéro étudiant : 1724602
+// Nom : Béatrice Duguay
+
 namespace GestionHotel
 {
     public partial class FormParent : Form
