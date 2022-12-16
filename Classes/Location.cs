@@ -16,6 +16,7 @@ namespace GestionHotel.Classes
         private string numeroLocation; // Numéro de la location
         private DateTime dateDebutLocation; // Date du début de la location
         private DateTime dateFinLocation; // Date de la fin de la location
+        private int duree; // La durée du séjour en jours
         private int nombreAdultes; // Nombre d'adultes dans la location
         private int nombreEnfants; // Nombre d'enfants dans la location
         private Client client; // Le client qui a fait la location
@@ -39,6 +40,13 @@ namespace GestionHotel.Classes
             get { return dateFinLocation; }
             set { dateFinLocation = value; }
         }
+
+        public int Duree
+        {
+            get { return duree; }
+            set { duree = value;  }
+        }
+
 
         public int NombreAdultes
         {
@@ -68,16 +76,18 @@ namespace GestionHotel.Classes
         public Location()
         {
             numeroLocation = "";
+            duree = 0;
             nombreAdultes = 0;
             nombreEnfants = 0;
         }
 
         // Constructeur avec paramètres 
-        public Location(string pNum, DateTime pDateDeb, DateTime pDateFin, int pNbAdu, int pNbEnf, Client pClient, EspaceLoue pEspace)
+        public Location(string pNum, DateTime pDateDeb, DateTime pDateFin, int pDuree,int pNbAdu, int pNbEnf, Client pClient, EspaceLoue pEspace)
         {
             this.numeroLocation = pNum;
             this.dateDebutLocation = pDateDeb;
             this.dateFinLocation = pDateFin;
+            this.duree = pDuree;
             this.nombreAdultes = pNbAdu;
             this.nombreEnfants = pNbEnf;
             this.client = pClient;
