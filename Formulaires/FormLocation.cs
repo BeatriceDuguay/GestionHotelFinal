@@ -109,7 +109,7 @@ namespace GestionHotel.Formulaires
             b_numChambre = VerifierRegex("^[0-9]{6}$", txtNumEspace, lblErreurNumEspace, "Six chiffres");
             b_numLoc = VerifierRegex("^[0-9]{7}$", txtNumLocation, lblErreurNumLocation, "Sept chiffres");
             // Appel de la métode VerifierDuree pour vérifier la durée de la location
-            b_duree = VerifierDuree(lblErreurFinLoc);
+            b_duree = VerifierDuree(dtDebutLocation, lblErreurDebutLoc, lblErreurFinLoc);
             // Si toutes les vérifications sont valides retourner vrai
             if (b_numLoc && b_numClient && b_numChambre && b_duree)
                 return true; // Retourner true
@@ -191,30 +191,47 @@ namespace GestionHotel.Formulaires
         // Méthode VerifierDuree()
         /// <summary>
         /// Vérifie que la durée de la location est de 1 jour et plus, mais de 28 jours maximum
+        /// Vérifie que la date du début de la location est plus grande ou égale à la date d'aujourd'hui
         /// </summary>
-        /// <param name="lb" le Label du formulaire></param>
+        /// <param name="dtpickerDebut" Le premier DateTimePicker du formulaire></param>
+        /// <param name="lb1" Le premier Label du formulaire></param>
+        /// <param name="lb2" Le deuxièeme Label du formulaire></param>
         /// <returns>
         ///     true si la location est d'une durée minimale de 1 jour et maximal de 28 jours
+        ///     false si la date DateTimePicker du début de la location est plus petite que la date d'aujourd'hui
         ///     false si la location n'est pas d'une durée minimale de 1 jour et maximal de 28 jours
         /// </returns>
-        public bool VerifierDuree(Label lb)
+        public bool VerifierDuree(DateTimePicker dtpickerDebut, Label lb1, Label lb2)
         {
+            // Instancier un objet test Location pour accéder à la méthode DureeSejour
             Location test = new Location();
+
+            // Si la date DateTimePicker du début de la location est plus petite que la date d'aujourd'hui
+            if (dtpickerDebut.Value.Date < DateTime.Now)
+            {
+                lb1.ForeColor = Color.Red;
+                lb1.Text = "Date indisponible"; // Afficher un message d'erreur
+                return false; // Retourner false
+            }
+
+            // Appel de la méthode DureeSejour
+            // Si la location est d'une durée minimale de 1 jour et maximal de 28 jours
             if (test.DureeSejour(dtDebutLocation, dtFinLocation) >= 1 & test.DureeSejour(dtDebutLocation, dtFinLocation) <= 28)
             {
-                return true;
+                return true; // Retourner true
             }
 
             else
             {
-                lb.ForeColor = Color.Red;
-                lb.Text = "1 jour minimum et 28 jours maximum";
-                return false;
+                lb2.ForeColor = Color.Red;
+                lb2.Text = "1 jour minimum et 28 jours maximum"; // Afficher un message d'erreur
+                return false; // Retourner false
             }
         }
 
         private void btnAjouterLoc_Click(object sender, EventArgs e)
         {
+            InitialiserLabel(); // Appel de la méthode InitialiserLabel
             // Si les méthodes VerifierTous, VerifierNumClient et VerifierNumEspace retournent true
             if (VerifierTous()) 
             {
@@ -284,6 +301,7 @@ namespace GestionHotel.Formulaires
 
         private void btnModifierLoc_Click(object sender, EventArgs e)
         {
+            InitialiserLabel(); // Appel de la méthode InitialiserLabel
             // Si les méthodes VerifierTous, VerifierNumClient et VerifierNumEspace retournent true
             if (VerifierTous())
             {
@@ -359,7 +377,7 @@ namespace GestionHotel.Formulaires
                 // Si le numéro de la location entrée par l'utilisateur se trouve dans la liste 
                 if (elt.NumeroLocation == txtNumLocation.Text)
                 {
-                    MessageBox.Show("Nombre de jours" + elt.Duree, "Consulter");
+                    MessageBox.Show("Nombre de jours : " + elt.Duree, "Consulter");
                 }
 
                 else
