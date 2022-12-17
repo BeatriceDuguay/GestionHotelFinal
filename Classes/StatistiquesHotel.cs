@@ -47,51 +47,39 @@ namespace GestionHotel.Classes
             listeLocations = new List<Location>();
         }
 
+        // Méthode LocationParDate
         /// <summary>
-        /// Affiche le nombre de client par type d'espace
+        /// Affiche le nombre de location par espace et par date
         /// </summary>
-        /// <param name="typeEspace"></param>
-        /// <returns> Le nombre de clients par type d'espace </returns>
-        public static int ClientsParEspace(string typeEspace)
+        /// <param name="typeEspace" Le type d'espace de l'espace></param>
+        /// <param name="dtPickerDate" Le DateTimePicker de la date de location></param>
+        /// <returns>
+        ///     Le nombre de location par espace et par date
+        /// </returns>
+        public static int LocationParDate(string typeEspace, DateTimePicker dtPickerDate)
         {
-            int cpt = 0; // Créer une variable pour compter le nombre d'étudiants
+            int cpt = 0; // Créer une variable pour compter le nombre de locations
+
             // Parcourir la liste des locations
             foreach (Location elt in ListeLocations)
             {
-                // Si la valeur TypeEspace de l'objet EspaceLoue est la même que celle sélectionnée dans le ComboBox
-                if (typeEspace == elt.EspaceLoue.TypeEspace)
-                {
-                    // Incrémenter le compteur
-                    cpt++;
-                }
-
-                // Sinon si la valeur sélectionnée dans le ComboBox du type d'espace est "Tous" 
-                else if (typeEspace == "tous")
-                {
-                    // Incrémenter le compteur
-                    cpt++;  
-                }
-            }
-            return cpt; // Retourner le nombre de clients par type d'espace
-        }
-
-        public static int LocationParDate(string typeEspace, DateTimePicker dtPickerDate)
-        {
-            int cpt = 0;
-
-            foreach (Location elt in ListeLocations)
-            {
+                // Si le type d'espace sélectionnée dans le ComboBox est la même valeur de l'attribut TypeEspace de l'objet Location
+                // ET la date sélectionnée dans le DateTimePicker plus grande ou égale à la valeur de l'attribut DateDebutLocation de l'objet Location
+                // ET la date sélectionnée dans le DateTimePicker plus petite ou égale à la valeur de l'attribut DateFinLocation de l'objet Location
                 if (typeEspace == elt.EspaceLoue.TypeEspace & dtPickerDate.Value >= elt.DateDebutLocation & dtPickerDate.Value <= elt.DateFinLocation)
                 {
-                    cpt++;
+                    cpt++; // Incrémenter le compteur
                 }
 
+                // Si le type d'espace sélectionnée dans le ComboBox est "Tous"
+                // ET la date sélectionnée dans le DateTimePicker plus grande ou égale à la valeur de l'attribut DateDebutLocation de l'objet Location
+                // ET la date sélectionnée dans le DateTimePicker plus petite ou égale à la valeur de l'attribut DateFinLocation de l'objet Location
                 else if (typeEspace == "Tous" & dtPickerDate.Value >= elt.DateDebutLocation & dtPickerDate.Value <= elt.DateFinLocation)
                 {
-                    cpt++;  
+                    cpt++;  // Incrémenter le compteur
                 }
             }
-            return cpt++;
+            return cpt++; // Retourner le nombre de locations
         }
     }
 }

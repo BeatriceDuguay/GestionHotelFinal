@@ -104,12 +104,15 @@ namespace GestionHotel.Formulaires
         {
             // Déclaration des booléens de validation des informations entrées
             bool b_numLoc, b_numClient, b_numChambre, b_duree;
+
             // Appel de la méthode VerifierRegex pour tous les champs et récupération des valeurs retournées dans les variables bouléennes
             b_numClient = VerifierRegex("^[0-9]{5}$", txtNumClient, lblErreurNumClient, "Cinq chiffres");
             b_numChambre = VerifierRegex("^[0-9]{6}$", txtNumEspace, lblErreurNumEspace, "Six chiffres");
             b_numLoc = VerifierRegex("^[0-9]{7}$", txtNumLocation, lblErreurNumLocation, "Sept chiffres");
+
             // Appel de la métode VerifierDuree pour vérifier la durée de la location
             b_duree = VerifierDuree(dtDebutLocation, lblErreurDebutLoc, lblErreurFinLoc);
+
             // Si toutes les vérifications sont valides retourner vrai
             if (b_numLoc && b_numClient && b_numChambre && b_duree)
                 return true; // Retourner true
@@ -246,8 +249,10 @@ namespace GestionHotel.Formulaires
                         {
                             // Instancier un objet test Location pour accéder à la méthode DureeSejour
                             Location test = new Location();
+
                             // Appel de la méthode DureeSejour
                             int dureeSejour = test.DureeSejour(dtDebutLocation, dtFinLocation);
+
                             // Instancier un objet Location avec les champs entrés par l'utilisateur
                             Location location = new Location(txtNumLocation.Text, dtDebutLocation.Value.Date,
                                                              dtFinLocation.Value.Date, dureeSejour, (int)numericNbAdultes.Value,
@@ -258,10 +263,12 @@ namespace GestionHotel.Formulaires
                             {
                                 // Ajouter la nouvelle location à la liste des locations de la classe statique StatistiquesHotel
                                 StatistiquesHotel.ListeLocations.Add(location);
+
                                 // Afficher les informations de la chambre dans une boîte de message
                                 MessageBox.Show(location.AfficherLocation() + "\n" + 
                                                 elt.AfficherClient() + "\n" + "\n" + 
                                                 elt1.AfficherEspace(), "Location ajoutée");
+
                                 // Appel de la méthode InitialiserControles
                                 InitialiserControles();
                                 // Appel de la méthode InitialiserLabel
@@ -322,20 +329,26 @@ namespace GestionHotel.Formulaires
                                 {
                                     // Instancier un objet test Location pour accéder à la méthode DureeSejour
                                     Location test = new Location();
+
                                     // Appel de la méthode DureeSejour
                                     int dureeSejour = test.DureeSejour(dtDebutLocation, dtFinLocation);
+
                                     // Supprimer l'élément de la liste 
                                     StatistiquesHotel.ListeLocations.Remove(elt);
+
                                     // Instancier un objet Location avec les champs entrés par l'utilisateur
                                     Location location = new Location(txtNumLocation.Text, dtDebutLocation.Value.Date,
                                                                      dtFinLocation.Value.Date, dureeSejour, (int)numericNbAdultes.Value,
                                                                      (int)numericNbEnfants.Value, elt1, elt2);
+
                                     // Ajouter la nouvelle location à la liste des locations de la classe statique StatistiquesHotel
                                     StatistiquesHotel.ListeLocations.Add(location);
+
                                     // Appel de la méthode InitialiserControles
                                     InitialiserControles();
                                     // Appel de la méthode InitialiserLabel
                                     InitialiserLabel();
+
                                     // Afficher les nouvelles informations de la chambre dans une boîte de message
                                     MessageBox.Show(location.AfficherLocation() + "\n" +
                                                     elt1.AfficherClient() + "\n" + "\n" +
@@ -358,11 +371,13 @@ namespace GestionHotel.Formulaires
                 if (elt.NumeroLocation == txtNumLocation.Text) 
                 {
                     StatistiquesHotel.ListeLocations.Remove(elt); // Supprimer la location de la liste
+
                     // Appel de la méthode InitialiserControles
                     InitialiserControles();
                     // Appel de la méthode InitialiserLabel
                     InitialiserLabel();
                     // Afficher un message de confirmation de suppression
+
                     MessageBox.Show("La location a bien été supprimée.", "Location supprimée");
 
                 }
@@ -378,6 +393,7 @@ namespace GestionHotel.Formulaires
                 if (elt.NumeroLocation == txtNumLocation.Text)
                 {
                     int nbPersonnes = elt.NombreEnfants + elt.NombreAdultes; // Calculer le nombre de personnes dans la location
+
                     // Afficher les statistiques de la location
                     MessageBox.Show("Nombre de jours : " + elt.Duree + "\n" +
                                     "Nombre de personnes : " + nbPersonnes.ToString(), "Consulter la location");

@@ -181,11 +181,14 @@ namespace GestionHotel
         {
             // Déclaration des booléens de validation de l'information entrée
             bool b_numero;
+
             // Appel de la méthode VerifierRegex pour le champ et récupération de la valeur retournée dans la variable bouléenne
             b_numero = VerifierRegex("^[0-9]{4}$", txtNumEmploye, lblErreurNumEmploye, "Quatre chiffres");
+
             // Si la vérification est valide retourner vrai
             if (b_numero)
                 return true; // Retourner true
+
             else return false; // Sinon retourner false
         }
 
@@ -207,11 +210,13 @@ namespace GestionHotel
                             locationToolStripMenuItem.Enabled = true;
                             chambreToolStripMenuItem.Enabled = true;
                             statistiquesToolStripMenuItem.Enabled = false;
+
                             // Appel de la méthode InitialiserControles
                             InitialiserControles();
                             // Appel de la méthode InitialiserLabel
                             InitialiserLabel();
                             // Afficher un message de réussite de connexion
+
                             MessageBox.Show("Connexion réussie.", "Message");
                             break; // Arrêter de parcourir la liste
                         }
@@ -223,15 +228,18 @@ namespace GestionHotel
                             locationToolStripMenuItem.Enabled = true;
                             chambreToolStripMenuItem.Enabled = true;
                             statistiquesToolStripMenuItem.Enabled = true;
+
                             // Appel de la méthode InitialiserControles
                             InitialiserControles();
                             // Appel de la méthode InitialiserLabel
                             InitialiserLabel();
+
                             // Afficher un message de réussite de connexion
                             MessageBox.Show("Connexion réussie.", "Message");
                             break; // Arrêter de parcourir la liste
                         }
                     }
+
                     else
                     {
                         lblErreurMdp.ForeColor = Color.Red; lblErreurMdp.Text = " Numéro d'employé ou mot de passe invalide. "; // Afficher un message d'erreur

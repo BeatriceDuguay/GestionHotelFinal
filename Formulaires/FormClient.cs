@@ -132,13 +132,16 @@ namespace GestionHotel.Formulaires
         {
             // Déclaration des booléens de validation des informations entrées
             bool b_numero, b_nom, b_prenom, b_age, b_numTel;
+
             // Appel de la méthode VerifierRegex pour tous les champs et récupération des valeurs retournées dans les variables bouléennes
             b_numero = VerifierRegex("^[0-9]{5}$", txtNumClient, lblErreurNumClient, "Cinq chiffres");
             b_nom = VerifierRegex("^[A-Z]{1}[a-z]{1,20}$", txtNom, lblErreurNom, "Lettre majuscule suivie de 1 à 20 lettres minuscules");
             b_prenom = VerifierRegex("^[A-Z]{1}[a-z]{1,20}$", txtPrenom, lblErreurPrenom, "Lettre majuscule suivie de 1 à 20 lettres minuscules");
             b_numTel = VerifierRegex("^[0-9]{10}$", txtTelephone, lblErreurTelephone, "Dix chiffres");
+
             // Appel de la métode VerifierAge pour vérifier l'âge de la personne
             b_age = VerifierAge(dtDateNaissance, lblErreurDateNaiss);
+
             // Si toutes les vérifications sont valides retourner vrai
             if (b_numero && b_nom && b_prenom && b_age && b_numTel)
                 return true; // Retourner true
@@ -180,10 +183,12 @@ namespace GestionHotel.Formulaires
                 {
                     // Ajouter le nouveau client à la liste des clients de la classe statique StatistiquesHotel
                     StatistiquesHotel.ListeClients.Add(client);
+
                     // Appel de la méthode InitialiserControles
                     InitialiserControles();
                     // Appel de la méthode InitialiserLabel
                     InitialiserLabel();
+
                     // Afficher les informations du client dans une boîte de message en appelant la méthode AfficherClient
                     MessageBox.Show(client.AfficherClient(), "Client ajouté");
                 }
@@ -200,7 +205,8 @@ namespace GestionHotel.Formulaires
         {
             // Si le client n'est pas dans la liste des clients, l'ajouter à la liste
             if (!StatistiquesHotel.ListeClients.Contains(client))
-                StatistiquesHotel.ListeClients.Add(client);              
+                StatistiquesHotel.ListeClients.Add(client); 
+            
             // Sinon afficher un message d'erreur
             else MessageBox.Show("Le client existe déjà. ", "Message");
         }
@@ -218,18 +224,22 @@ namespace GestionHotel.Formulaires
                         // Instancier un objet Client avec les champs entrés par l'utilisateur
                         Client client = new Client(txtNumClient.Text, txtPrenom.Text, txtNom.Text, dtDateNaissance.Value.Date,
                                                    txtTelephone.Text);
+
                         // Supprimer le client de la liste
                         StatistiquesHotel.ListeClients.Remove(elt);
+
                         // Ajouter les nouvelles informations du client à la liste
                         AjouterClient(client);
                         // Appel de la méthode InitialiserControles
                         InitialiserControles();
                         // Appel de la méthode InitialiserLabel
                         InitialiserLabel();
+
                         // Afficher les nouvelles informations du client dans une boîte de message
                         MessageBox.Show(client.AfficherClient(), "Client modifié");
                         break; // Arrêter de parcourir la liste
                     }
+
                     else MessageBox.Show("Client Inexistant", "Message"); // Sinon afficher message d'erreur
                 }
             }
@@ -247,6 +257,7 @@ namespace GestionHotel.Formulaires
         {
             // Déclaration du booléen de validation de l'informations entrée
             bool b_numero;
+
             // Appel de la méthode VerifierRegex pour le champs Numero et récupération de la valeur retournée dans la variable bouléenne
             b_numero = VerifierRegex("^[0-9]{5}$", txtNumClient, lblErreurNumClient, "Cinq chiffres");
             if (b_numero)
@@ -266,14 +277,17 @@ namespace GestionHotel.Formulaires
                     {
                         // Supprimer le client de la liste
                         StatistiquesHotel.ListeClients.Remove(elt);
+
                         // Appel de la méthode InitialiserControles
                         InitialiserControles();
                         // Appel de la méthode InitialiserLabel
                         InitialiserLabel();
+
                         // Afficher un message de confirmation dans une boîte de message
                         MessageBox.Show("Le client a bien été supprimé.", "Client supprimé");
                         break; // Arrêter de parcourir la liste
                     }
+
                     else MessageBox.Show("Client inexistant ", "Message"); // Sinon afficher un message d'erreur
                 }
             }

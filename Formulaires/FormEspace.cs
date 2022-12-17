@@ -148,12 +148,16 @@ namespace GestionHotel.Formulaires
         {
             // Déclaration des booléens de validation des informations entrées
             bool b_numero, b_comboBoxType, b_radioBtn;
+
             // Appel de la méthode VerifierRegex pour tous les champs et récupération des valeurs retournées dans les variables bouléennes
             b_numero = VerifierRegex("^[0-9]{6}$", txtNumEspace, lblErreurNumEspace, "Six chiffres");
+
             // Vérifier que la combobox Programme contient une valeur
             b_comboBoxType = VerifierCombobox(cboTypeEspace, lblErreurType);
+
             // Vérifier qu'un des deux radioButton est coché
             b_radioBtn = VerifierMiniBar(radioBtnOui, radioBtnNon, lblErreurMiniBar);
+
             // Si toutes les vérifications sont valides retourner true
             if (b_numero && b_comboBoxType && b_radioBtn)
                 return true; // Retourner true
@@ -192,6 +196,7 @@ namespace GestionHotel.Formulaires
             {
                 // Rendre visible le Label mini bar
                 lblMiniBar.Visible = true;
+
                 // Rendre visible les RadioButton
                 radioBtnOui.Visible = true;
                 radioBtnNon.Visible = true;
@@ -202,6 +207,7 @@ namespace GestionHotel.Formulaires
             {
                 // Rendre visible le Label nombre de chambres
                 lblNbChambres.Visible = true;
+
                 // Rendre visible le NumericUpDown du nombre de chambres
                 numericNbChambres.Visible = true;
             }            
@@ -217,8 +223,10 @@ namespace GestionHotel.Formulaires
                     {
                         // Instancier un objet Chambre test pour pouvoir accéder à la méthode abstraite CalculerPrix
                         Chambre test = new Chambre();
+
                         // Ajouter 30$ au prix de la chambre pour le mini bar
                         int prix = test.CalculerPrix((int)numericNbLits.Value, 0) + 30;
+
                         // Instancier un objet Chambre avec les champs entrés par l'utilisateur
                         Chambre chambre = new Chambre(txtNumEspace.Text, (int)numericNbLits.Value, prix, cboTypeEspace.Text, radioBtnOui.Text);
 
@@ -226,12 +234,15 @@ namespace GestionHotel.Formulaires
                         {
                             // Ajouter la nouvelle chambre à la liste des espaces de la classe statique StatistiquesHotel
                             StatistiquesHotel.ListeEspaceLoue.Add(chambre);
+
                             // Appel de la méthode InitialiserControles
                             InitialiserControles();
                             // Appel de la méthode InitialiserLabel
                             InitialiserLabel();
                             // Afficher les informations de la chambre dans une boîte de message
+
                             MessageBox.Show(chambre.AfficherChambre(), "Chambre ajoutée");
+
                             // Rendre invisible le Label mini bar
                             lblMiniBar.Visible = false;
                             // Rendre invisible les RadioButton
@@ -252,12 +263,15 @@ namespace GestionHotel.Formulaires
                         {
                             // Ajouter la nouvelle chambre à la liste des espaces de la classe statique StatistiquesHotel
                             StatistiquesHotel.ListeEspaceLoue.Add(chambre);
+
                             // Appel de la méthode InitialiserControles
                             InitialiserControles();
                             // Appel de la méthode InitialiserLabel
                             InitialiserLabel();
+
                             // Afficher les informations de la chambre dans une boîte de message
                             MessageBox.Show(chambre.AfficherChambre(), "Chambre ajoutée");
+
                             // Rendre invisible le Label mini bar
                             lblMiniBar.Visible = false;
                             // Rendre invisible les RadioButton
@@ -279,12 +293,15 @@ namespace GestionHotel.Formulaires
                     {
                         // Ajouter la nouvelle suite à la liste des espaces de la classe statique StatistiquesHotel
                         StatistiquesHotel.ListeEspaceLoue.Add(suite);
+
                         // Appel de la méthode InitialiserControles
                         InitialiserControles();
                         // Appel de la méthode InitialiserLabel
                         InitialiserLabel();
+
                         // Afficher les informations de la chambre dans une boîte de message
                         MessageBox.Show(suite.AfficherSuite(), "Suite ajoutée");
+
                         // Rendre invisible le Label nombre de chambres
                         lblNbChambres.Visible = false;
                         // Rendre invisible le NumericUpDown du nombre de chambres
@@ -305,6 +322,7 @@ namespace GestionHotel.Formulaires
             // Si la chambre n'est pas dans la liste des espaces, l'ajouter à la liste
             if (!StatistiquesHotel.ListeEspaceLoue.Contains(chambre))
                 StatistiquesHotel.ListeEspaceLoue.Add(chambre);
+
             // Sinon afficher un message d'erreur
             else MessageBox.Show("La chambre existe déjà. ", "Message");
         }
@@ -320,6 +338,7 @@ namespace GestionHotel.Formulaires
             // Si la suite n'est pas dans la liste des espaces, l'ajouter à la liste
             if (!StatistiquesHotel.ListeEspaceLoue.Contains(suite))
                 StatistiquesHotel.ListeEspaceLoue.Add(suite);
+
             // Sinon afficher un message d'erreur
             else MessageBox.Show("La suite existe déjà. ", "Message");
         }
@@ -340,20 +359,27 @@ namespace GestionHotel.Formulaires
                             {
                                 // Supprimer l'élément de la liste 
                                 StatistiquesHotel.ListeEspaceLoue.Remove(elt);
+
                                 // Instancier un objet Chambre test pour pouvoir accéder à la méthode abstraite CalculerPrix
                                 Chambre test = new Chambre();
+
                                 // Ajouter 30$ au prix de la chambre pour le mini bar
                                 int prix = test.CalculerPrix((int)numericNbLits.Value, 0) + 30;
+
                                 // Instancier un objet Chambre avec les champs entrés par l'utilisateur
                                 Chambre chambre = new Chambre(txtNumEspace.Text, (int)numericNbLits.Value, prix, cboTypeEspace.Text, radioBtnOui.Text);
+
                                 // Ajouter la nouvelle chambre à la liste des espaces de la classe statique StatistiquesHotel
                                 StatistiquesHotel.ListeEspaceLoue.Add(chambre);
+
                                 // Appel de la méthode InitialiserControles
                                 InitialiserControles();
                                 // Appel de la méthode InitialiserLabel
                                 InitialiserLabel();
+
                                 // Afficher les informations de la chambre dans une boîte de message
                                 MessageBox.Show(chambre.AfficherChambre(), "Chambre modifiée");
+
                                 // Rendre invisible le Label mini bar
                                 lblMiniBar.Visible = false;
                                 // Rendre invisible les RadioButton
@@ -365,19 +391,25 @@ namespace GestionHotel.Formulaires
                             {
                                 // Supprimer l'élément de la liste 
                                 StatistiquesHotel.ListeEspaceLoue.Remove(elt);
+
                                 // Instancier un objet Chambre test pour pouvoir accéder à la méthode abstraite CalculerPrix
                                 Chambre test = new Chambre();
                                 int prix = test.CalculerPrix((int)numericNbLits.Value, 0);
+
                                 // Instancier un objet Chambre avec les champs entrés par l'utilisateur
                                 Chambre chambre = new Chambre(txtNumEspace.Text, (int)numericNbLits.Value, prix, cboTypeEspace.Text, radioBtnNon.Text);
+
                                 // Ajouter la nouvelle chambre à la liste des espaces de la classe statique StatistiquesHotel
                                 StatistiquesHotel.ListeEspaceLoue.Add(chambre);
+
                                 // Appel de la méthode InitialiserControles
                                 InitialiserControles();
                                 // Appel de la méthode InitialiserLabel
                                 InitialiserLabel();
+
                                 // Afficher les informations de la chambre dans une boîte de message
                                 MessageBox.Show(chambre.AfficherChambre(), "Chambre modifiée");
+
                                 // Rendre invisible le Label mini bar
                                 lblMiniBar.Visible = false;
                                 // Rendre invisible les RadioButton
@@ -398,19 +430,25 @@ namespace GestionHotel.Formulaires
                         {
                             // Supprimer l'élément de la liste 
                             StatistiquesHotel.ListeEspaceLoue.Remove(elt);
+
                             // Instancier un objet Suite test pour pouvoir accéder à la méthode abstraite CalculerPrix
                             Suite test = new Suite();
                             int prix = test.CalculerPrix((int)numericNbLits.Value, 0);
+
                             // Instancier un objet Suite avec les champs entrés par l'utilisateur
                             Suite suite = new Suite(txtNumEspace.Text, (int)numericNbLits.Value, prix, cboTypeEspace.Text, (int)numericNbChambres.Value);
+
                             // Ajouter la nouvelle suite à la liste des espaces de la classe statique StatistiquesHotel
                             StatistiquesHotel.ListeEspaceLoue.Add(suite);
+
                             // Appel de la méthode InitialiserControles
                             InitialiserControles();
                             // Appel de la méthode InitialiserLabel
                             InitialiserLabel();
+
                             // Afficher les informations de la chambre dans une boîte de message
                             MessageBox.Show(suite.AfficherSuite(), "Suite modifiée");
+
                             // Rendre invisible le Label nombre de chambres
                             lblNbChambres.Visible = false;
                             // Rendre invisible le NumericUpDown du nombre de chambres
@@ -456,11 +494,13 @@ namespace GestionHotel.Formulaires
                         {
                             // Supprimer le client de la liste
                             StatistiquesHotel.ListeEspaceLoue.Remove(elt);
+
                             // Appel de la méthode InitialiserControles
                             InitialiserControles();
                             // Appel de la méthode InitialiserLabel
                             InitialiserLabel();
                             // Afficher un message de confirmation dans une boîte de message
+
                             MessageBox.Show("La chambre a bien été supprimée.", "Chambre supprimée");
                         }
 
@@ -468,10 +508,12 @@ namespace GestionHotel.Formulaires
                         {
                             // Supprimer le client de la liste
                             StatistiquesHotel.ListeEspaceLoue.Remove(elt);
+
                             // Appel de la méthode InitialiserControles
                             InitialiserControles();
                             // Appel de la méthode InitialiserLabel
                             InitialiserLabel();
+
                             // Afficher un message de confirmation dans une boîte de message
                             MessageBox.Show("La suite a bien été supprimée.", "Suite supprimée");
                         }

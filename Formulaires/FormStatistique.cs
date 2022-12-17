@@ -33,6 +33,7 @@ namespace GestionHotel.Formulaires
         {
             ListViewItem item;
             string[] list = new string[9];
+
             // Mettre les items dans un tableau
             list[0] = location.NumeroLocation;
             list[1] = location.DateDebutLocation.ToLongDateString().ToString();
@@ -43,8 +44,10 @@ namespace GestionHotel.Formulaires
             list[6] = location.EspaceLoue.NumeroEspace;
             list[7] = location.EspaceLoue.TypeEspace;
             list[8] = location.Client.NumeroClient;
+
             // Créer un objet ListViewItem 
             item = new ListViewItem(list);
+
             // Ajouter l'item ListViewItem à la ListView
             listViewLocations.Items.Add(item);
         }
@@ -53,13 +56,16 @@ namespace GestionHotel.Formulaires
         {
             // Initialiser le Label du nombre de clients
             lblNbClientsEspaceShow.Text = "";
+
             // Ajouter des valeurs au ComboBox
             cboTypeEspace.Items.Add("Tous");
             cboTypeEspace.Items.Add("Chambre");
             cboTypeEspace.Items.Add("Suite");
+
             // Modifier le format du DateTimePicker 
             dtDateLocation.Format = DateTimePickerFormat.Custom;
             dtDateLocation.CustomFormat = "dd MMMM yyyy";
+
             // Mettre les ComboBox au premier index
             cboTypeEspace.SelectedIndex = 0;
         }
@@ -68,22 +74,39 @@ namespace GestionHotel.Formulaires
         {
             // Effacer la ListView
             listViewLocations.Items.Clear();
-            //
+
+            // Parcourir la liste des locations
             foreach (Location elt in StatistiquesHotel.ListeLocations)
             {
+                // Si le type d'espace sélectionnée dans le ComboBox est la même valeur de l'attribut TypeEspace de l'objet Location
+                // ET la date sélectionnée dans le DateTimePicker plus grande ou égale à la valeur de l'attribut DateDebutLocation de l'objet Location
+                // ET la date sélectionnée dans le DateTimePicker plus petite ou égale à la valeur de l'attribut DateFinLocation de l'objet Location
                 if (elt.EspaceLoue.TypeEspace == cboTypeEspace.Text & dtDateLocation.Value >= elt.DateDebutLocation & dtDateLocation.Value <= elt.DateFinLocation)
                 {
+                    // Appel de la méthode AfficherLocation
                     AfficherLocations(elt);
+                    // Appel de la fonction LocationParDate et la transformer en string
                     string s = StatistiquesHotel.LocationParDate(cboTypeEspace.Text, dtDateLocation).ToString();
+                    // Afficher le nombre de locations
                     lblNbClientsEspaceShow.Text = s;
                 }
 
+                // Si le type d'espace sélectionnée dans le ComboBox est "Tous"
+                // ET la date sélectionnée dans le DateTimePicker plus grande ou égale à la valeur de l'attribut DateDebutLocation de l'objet Location
+                // ET la date sélectionnée dans le DateTimePicker plus petite ou égale à la valeur de l'attribut DateFinLocation de l'objet Location
                 else if (cboTypeEspace.Text == "Tous" & dtDateLocation.Value >= elt.DateDebutLocation & dtDateLocation.Value <= elt.DateFinLocation)
                 {
+                    // Appel de la méthode AfficherLocation
                     AfficherLocations(elt);
+                    // Appel de la fonction LocationParDate et la transformer en string
+                    string s = StatistiquesHotel.LocationParDate(cboTypeEspace.Text, dtDateLocation).ToString();
+                    // Afficher le nombre de locations
+                    lblNbClientsEspaceShow.Text = s;
                 }
             }
+            // Appel de la fonction LocationParDate et la transformer en string
             string str = StatistiquesHotel.LocationParDate(cboTypeEspace.Text, dtDateLocation).ToString();
+            // Afficher le nombre de locations
             lblNbClientsEspaceShow.Text = str;
         }
     }
