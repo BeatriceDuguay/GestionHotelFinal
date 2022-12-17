@@ -38,6 +38,8 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cboTypeEspace = new System.Windows.Forms.ComboBox();
             this.lblTypeEspace = new System.Windows.Forms.Label();
@@ -45,14 +47,12 @@
             this.lblNbClientsLocation = new System.Windows.Forms.Label();
             this.lblDateLocation = new System.Windows.Forms.Label();
             this.dtDateLocation = new System.Windows.Forms.DateTimePicker();
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // btnAfficherLocations
             // 
             this.btnAfficherLocations.Font = new System.Drawing.Font("Yu Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAfficherLocations.Location = new System.Drawing.Point(250, 597);
+            this.btnAfficherLocations.Location = new System.Drawing.Point(329, 596);
             this.btnAfficherLocations.Margin = new System.Windows.Forms.Padding(4);
             this.btnAfficherLocations.Name = "btnAfficherLocations";
             this.btnAfficherLocations.Size = new System.Drawing.Size(321, 28);
@@ -65,7 +65,7 @@
             // 
             this.lblNbClientsEspaceShow.AutoSize = true;
             this.lblNbClientsEspaceShow.Font = new System.Drawing.Font("Yu Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNbClientsEspaceShow.Location = new System.Drawing.Point(312, 517);
+            this.lblNbClientsEspaceShow.Location = new System.Drawing.Point(361, 515);
             this.lblNbClientsEspaceShow.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNbClientsEspaceShow.Name = "lblNbClientsEspaceShow";
             this.lblNbClientsEspaceShow.Size = new System.Drawing.Size(23, 25);
@@ -76,7 +76,7 @@
             // 
             this.lblNbClientsEspace.AutoSize = true;
             this.lblNbClientsEspace.Font = new System.Drawing.Font("Yu Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNbClientsEspace.Location = new System.Drawing.Point(19, 517);
+            this.lblNbClientsEspace.Location = new System.Drawing.Point(68, 515);
             this.lblNbClientsEspace.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNbClientsEspace.Name = "lblNbClientsEspace";
             this.lblNbClientsEspace.Size = new System.Drawing.Size(291, 25);
@@ -99,10 +99,10 @@
             this.listViewLocations.FullRowSelect = true;
             this.listViewLocations.GridLines = true;
             this.listViewLocations.HideSelection = false;
-            this.listViewLocations.Location = new System.Drawing.Point(24, 143);
+            this.listViewLocations.Location = new System.Drawing.Point(73, 145);
             this.listViewLocations.Margin = new System.Windows.Forms.Padding(4);
             this.listViewLocations.Name = "listViewLocations";
-            this.listViewLocations.Size = new System.Drawing.Size(757, 344);
+            this.listViewLocations.Size = new System.Drawing.Size(821, 344);
             this.listViewLocations.TabIndex = 32;
             this.listViewLocations.UseCompatibleStateImageBehavior = false;
             this.listViewLocations.View = System.Windows.Forms.View.Details;
@@ -110,44 +110,56 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "# Location";
-            this.columnHeader1.Width = 74;
+            this.columnHeader1.Width = 104;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Date début";
-            this.columnHeader2.Width = 86;
+            this.columnHeader2.Width = 115;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Date fin";
-            this.columnHeader3.Width = 68;
+            this.columnHeader3.Width = 106;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "Duree";
-            this.columnHeader4.Width = 52;
+            this.columnHeader4.Width = 70;
             // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "Nombre adultes";
-            this.columnHeader5.Width = 103;
+            this.columnHeader5.Width = 120;
             // 
             // columnHeader6
             // 
             this.columnHeader6.Text = "Nombre enfants";
-            this.columnHeader6.Width = 100;
+            this.columnHeader6.Width = 128;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.DisplayIndex = 7;
+            this.columnHeader7.Text = "# Espace";
+            this.columnHeader7.Width = 99;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.DisplayIndex = 8;
+            this.columnHeader8.Text = "Type espace";
+            this.columnHeader8.Width = 96;
             // 
             // columnHeader9
             // 
             this.columnHeader9.DisplayIndex = 6;
             this.columnHeader9.Text = "# Client";
-            this.columnHeader9.Width = 73;
+            this.columnHeader9.Width = 97;
             // 
             // cboTypeEspace
             // 
             this.cboTypeEspace.Font = new System.Drawing.Font("Yu Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboTypeEspace.FormattingEnabled = true;
-            this.cboTypeEspace.Location = new System.Drawing.Point(208, 43);
+            this.cboTypeEspace.Location = new System.Drawing.Point(287, 42);
             this.cboTypeEspace.Margin = new System.Windows.Forms.Padding(4);
             this.cboTypeEspace.Name = "cboTypeEspace";
             this.cboTypeEspace.Size = new System.Drawing.Size(320, 29);
@@ -157,7 +169,7 @@
             // 
             this.lblTypeEspace.AutoSize = true;
             this.lblTypeEspace.Font = new System.Drawing.Font("Yu Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTypeEspace.Location = new System.Drawing.Point(19, 44);
+            this.lblTypeEspace.Location = new System.Drawing.Point(98, 43);
             this.lblTypeEspace.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTypeEspace.Name = "lblTypeEspace";
             this.lblTypeEspace.Size = new System.Drawing.Size(137, 25);
@@ -168,7 +180,7 @@
             // 
             this.lblNbClientsLocationShow.AutoSize = true;
             this.lblNbClientsLocationShow.Font = new System.Drawing.Font("Yu Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNbClientsLocationShow.Location = new System.Drawing.Point(334, 551);
+            this.lblNbClientsLocationShow.Location = new System.Drawing.Point(383, 549);
             this.lblNbClientsLocationShow.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNbClientsLocationShow.Name = "lblNbClientsLocationShow";
             this.lblNbClientsLocationShow.Size = new System.Drawing.Size(23, 25);
@@ -179,7 +191,7 @@
             // 
             this.lblNbClientsLocation.AutoSize = true;
             this.lblNbClientsLocation.Font = new System.Drawing.Font("Yu Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNbClientsLocation.Location = new System.Drawing.Point(19, 551);
+            this.lblNbClientsLocation.Location = new System.Drawing.Point(68, 549);
             this.lblNbClientsLocation.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNbClientsLocation.Name = "lblNbClientsLocation";
             this.lblNbClientsLocation.Size = new System.Drawing.Size(315, 25);
@@ -190,7 +202,7 @@
             // 
             this.lblDateLocation.AutoSize = true;
             this.lblDateLocation.Font = new System.Drawing.Font("Yu Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDateLocation.Location = new System.Drawing.Point(19, 93);
+            this.lblDateLocation.Location = new System.Drawing.Point(98, 92);
             this.lblDateLocation.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDateLocation.Name = "lblDateLocation";
             this.lblDateLocation.Size = new System.Drawing.Size(60, 25);
@@ -202,29 +214,17 @@
             this.dtDateLocation.CalendarFont = new System.Drawing.Font("Yu Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtDateLocation.Font = new System.Drawing.Font("Yu Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtDateLocation.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtDateLocation.Location = new System.Drawing.Point(208, 87);
+            this.dtDateLocation.Location = new System.Drawing.Point(287, 86);
             this.dtDateLocation.Margin = new System.Windows.Forms.Padding(4);
             this.dtDateLocation.Name = "dtDateLocation";
             this.dtDateLocation.Size = new System.Drawing.Size(320, 34);
             this.dtDateLocation.TabIndex = 47;
             // 
-            // columnHeader7
-            // 
-            this.columnHeader7.DisplayIndex = 7;
-            this.columnHeader7.Text = "# Espace";
-            this.columnHeader7.Width = 75;
-            // 
-            // columnHeader8
-            // 
-            this.columnHeader8.DisplayIndex = 8;
-            this.columnHeader8.Text = "Type espace";
-            this.columnHeader8.Width = 121;
-            // 
             // FormStatistique
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(804, 668);
+            this.ClientSize = new System.Drawing.Size(966, 668);
             this.Controls.Add(this.dtDateLocation);
             this.Controls.Add(this.lblDateLocation);
             this.Controls.Add(this.lblNbClientsLocationShow);

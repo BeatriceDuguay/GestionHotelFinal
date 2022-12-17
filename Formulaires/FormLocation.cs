@@ -103,7 +103,7 @@ namespace GestionHotel.Formulaires
         public bool VerifierTous()
         {
             // Déclaration des booléens de validation des informations entrées
-            bool b_numLoc, b_numClient, b_numChambre, b_duree;
+            bool b_numLoc, b_numClient, b_numChambre, b_duree, b_dispo;
 
             // Appel de la méthode VerifierRegex pour tous les champs et récupération des valeurs retournées dans les variables bouléennes
             b_numClient = VerifierRegex("^[0-9]{5}$", txtNumClient, lblErreurNumClient, "Cinq chiffres");
@@ -113,8 +113,11 @@ namespace GestionHotel.Formulaires
             // Appel de la métode VerifierDuree pour vérifier la durée de la location
             b_duree = VerifierDuree(dtDebutLocation, lblErreurDebutLoc, lblErreurFinLoc);
 
+            // Appel de la méthode VerifierDispo pour vérifier si l'espace est disponible
+            b_dispo = VerifierDispo(dtDebutLocation, dtFinLocation, lblErreurNumEspace);
+
             // Si toutes les vérifications sont valides retourner vrai
-            if (b_numLoc && b_numClient && b_numChambre && b_duree)
+            if (b_numLoc && b_numClient && b_numChambre && b_duree && b_dispo)
                 return true; // Retourner true
             else return false; // Sinon retourner false
         }
@@ -230,6 +233,32 @@ namespace GestionHotel.Formulaires
                 lb2.Text = "1 jour minimum et 28 jours maximum"; // Afficher un message d'erreur
                 return false; // Retourner false
             }
+        }
+
+        // Méthode VerifierDispo
+        /// <summary>
+        /// Vérifie que l'espace n'est pas déjà loué
+        /// </summary>
+        /// <param name="dtpickerDebut" Le DateTimePicker du début de la location></param>
+        /// <param name="dtpickerFin" Le DateTimePicker de la fin de la location></param>
+        /// <param name="lb" Le Label d'erreur du numéro de la chambre></param>
+        /// <returns></returns>
+        public bool VerifierDispo(DateTimePicker dtpickerDebut, DateTimePicker dtpickerFin, Label lb)
+        {
+            // Parcourir la liste des locations
+            foreach (Location elt in StatistiquesHotel.ListeLocations)
+            {
+                // Si le numéro de l'espace dans la liste est le même que celui entré par l'utilisateur
+                // ET la date du début de la location entrée par l'utilisateur est plus petite que la date de la fin de la location dans la liste
+                // ET LOGIQUE la date du début de la location dans la liste est plus petite que la date de la fin de la location entrée par l'utilisateur
+                if (elt.EspaceLoue.NumeroEspace == txtNumEspace.Text & dtpickerDebut.Value < elt.DateFinLocation && elt.DateDebutLocation < dtpickerFin.Value) // CODE DE : https://stackoverflow.com/a/13513973
+                {
+                    lb.ForeColor = Color.Red;
+                    lb.Text = "Espace déjà loué"; // Afficher un message d'erreur
+                    return false; // Retourner false
+                }
+            }
+            return true; // Retourner true
         }
 
         private void btnAjouterLoc_Click(object sender, EventArgs e)

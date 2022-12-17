@@ -64,7 +64,8 @@ namespace GestionHotel
 
         // Code de Hasna Hocini (GestElection)
         private void connexionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        { 
+            // Rendre les Label, TextBox et le Button visibles
             lblNumEmploye.Visible = true;
             txtNumEmploye.Visible = true;
             lblErreurNumEmploye.Visible = true;
@@ -79,7 +80,7 @@ namespace GestionHotel
         {
             FormClient f = new FormClient(); // Création d'une instance du formulaire enfant FormClient
             f.MdiParent = this;
-            f.WindowState = FormWindowState.Maximized; // Mettre la taille du formulaire enfant FormClient à Maximized
+            f.WindowState = FormWindowState.Normal; // Mettre la taille du formulaire enfant FormClient à normale
             f.Show();
         }
 
@@ -88,7 +89,7 @@ namespace GestionHotel
         {
             FormLocation f = new FormLocation(); // Création d'une instance du formulaire enfant FormLocation
             f.MdiParent = this;
-            f.WindowState = FormWindowState.Maximized; // Mettre la taille du formulaire enfant FormLocation à Maximized
+            f.WindowState = FormWindowState.Normal; // Mettre la taille du formulaire enfant FormLocation à normale
             f.Show();
         }
 
@@ -97,7 +98,7 @@ namespace GestionHotel
         {
             FormEspace f = new FormEspace(); // Création d'une instance du formulaire enfant FormChambre
             f.MdiParent = this;
-            f.WindowState = FormWindowState.Maximized; // Mettre la taille du formulaire enfant FormChambre à Maximized
+            f.WindowState = FormWindowState.Normal; // Mettre la taille du formulaire enfant FormChambre à normale
             f.Show();
         }
 
@@ -106,7 +107,7 @@ namespace GestionHotel
         {
             FormStatistique f = new FormStatistique(); // Création d'une instance du formulaire enfant FormStatistique
             f.MdiParent = this;
-            f.WindowState = FormWindowState.Maximized; // Mettre la taille du formulaire enfant FormStatistique à Maximized
+            f.WindowState = FormWindowState.Normal; // Mettre la taille du formulaire enfant FormStatistique à normale
             f.Show();
         }
 
