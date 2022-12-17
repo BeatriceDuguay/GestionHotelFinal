@@ -425,7 +425,9 @@ namespace GestionHotel.Formulaires
 
                     // Afficher les statistiques de la location
                     MessageBox.Show("Nombre de jours : " + elt.Duree + "\n" +
-                                    "Nombre de personnes : " + nbPersonnes.ToString(), "Consulter la location");
+                                    "Nombre de personnes : " + nbPersonnes.ToString() + "\n" +
+                                    "Check-in : " + elt.DateDebutLocation.ToString() + " 15h" + "\n" + 
+                                    "Check-out : " + elt.DateFinLocation.ToString() + " 11h", "Consulter la location");
                 }
 
                 else
