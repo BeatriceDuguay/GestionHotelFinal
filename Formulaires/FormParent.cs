@@ -79,7 +79,7 @@ namespace GestionHotel
         {
             FormClient f = new FormClient(); // Création d'une instance du formulaire enfant FormClient
             f.MdiParent = this;
-            f.WindowState = FormWindowState.Normal; // Mettre la taille du formulaire enfant FormClient à normal
+            f.WindowState = FormWindowState.Maximized; // Mettre la taille du formulaire enfant FormClient à Maximized
             f.Show();
         }
 
@@ -88,7 +88,7 @@ namespace GestionHotel
         {
             FormLocation f = new FormLocation(); // Création d'une instance du formulaire enfant FormLocation
             f.MdiParent = this;
-            f.WindowState = FormWindowState.Normal; // Mettre la taille du formulaire enfant FormLocation à normal
+            f.WindowState = FormWindowState.Maximized; // Mettre la taille du formulaire enfant FormLocation à Maximized
             f.Show();
         }
 
@@ -97,7 +97,7 @@ namespace GestionHotel
         {
             FormEspace f = new FormEspace(); // Création d'une instance du formulaire enfant FormChambre
             f.MdiParent = this;
-            f.WindowState = FormWindowState.Normal; // Mettre la taille du formulaire enfant FormChambre à normal
+            f.WindowState = FormWindowState.Maximized; // Mettre la taille du formulaire enfant FormChambre à Maximized
             f.Show();
         }
 
@@ -106,7 +106,7 @@ namespace GestionHotel
         {
             FormStatistique f = new FormStatistique(); // Création d'une instance du formulaire enfant FormStatistique
             f.MdiParent = this;
-            f.WindowState = FormWindowState.Normal; // Mettre la taille du formulaire enfant FormStatistique à normal
+            f.WindowState = FormWindowState.Maximized; // Mettre la taille du formulaire enfant FormStatistique à Maximized
             f.Show();
         }
 
