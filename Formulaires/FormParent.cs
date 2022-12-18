@@ -211,7 +211,7 @@ namespace GestionHotel
                             // Rendre les ToolStripMenuItem accessibles (sauf celui qui permet d'accéder aux statistiques)
                             clientToolStripMenuItem.Enabled = true;
                             locationToolStripMenuItem.Enabled = true;
-                            chambreToolStripMenuItem.Enabled = true;
+                            chambreToolStripMenuItem.Enabled = false;
                             statistiquesToolStripMenuItem.Enabled = false;
 
                             // Appel de la méthode InitialiserControles
