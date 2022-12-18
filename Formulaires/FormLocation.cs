@@ -73,7 +73,7 @@ namespace GestionHotel.Formulaires
         ///     false si le champ entré par l'utilisateur est invalide 
         /// </returns>
         // Code de Hasna Hocini (GestElection)
-        public bool VerifierRegex(string modele, System.Windows.Forms.TextBox tb, System.Windows.Forms.Label lb, string messageErreur)
+        public bool VerifierRegex(string modele, TextBox tb, Label lb, string messageErreur)
         {
             // Créer du Regex reg
             Regex reg = new Regex(modele);

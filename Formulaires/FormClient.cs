@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -205,8 +207,9 @@ namespace GestionHotel.Formulaires
         {
             // Si le client n'est pas dans la liste des clients, l'ajouter à la liste
             if (!StatistiquesHotel.ListeClients.Contains(client))
-                StatistiquesHotel.ListeClients.Add(client); 
-            
+            {
+                StatistiquesHotel.ListeClients.Add(client);
+            }
             // Sinon afficher un message d'erreur
             else MessageBox.Show("Le client existe déjà. ", "Message");
         }

@@ -47,7 +47,7 @@ namespace GestionHotel.Classes
             listeLocations = new List<Location>();
         }
 
-        //Méthode NombreLocations
+        //Méthode statique NombreLocations
         /// <summary>
         /// Calcule le nombre total de locations   
         /// </summary>
@@ -68,7 +68,7 @@ namespace GestionHotel.Classes
             return cpt; // Retourner le nombre total de locations
         }
 
-        // Méthode LocationParDate
+        // Méthode statique LocationParDate
         /// <summary>
         /// Calcule le nombre de location par espace et par date
         /// </summary>
