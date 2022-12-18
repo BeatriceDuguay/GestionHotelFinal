@@ -262,25 +262,6 @@ namespace GestionHotel.Formulaires
             return true; // Retourner true
         }
 
-        public bool VerifierPersonnesParLits()
-        {
-            foreach (EspaceLoue elt in StatistiquesHotel.ListeEspaceLoue)
-            {
-                int nbPersonnes = Convert.ToInt32(numericNbAdultes.Value) + Convert.ToInt32(numericNbEnfants.Value); // Calculer le nombre de personnes dans la location
-                if (elt.NombreLits == 1 & nbPersonnes >= 1 & nbPersonnes <= 2 | 
-                    elt.NombreLits == 2 & nbPersonnes >= 1 & nbPersonnes <= 4 |
-                    elt.NombreLits == 3 & nbPersonnes >= 1 & nbPersonnes <= 6)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            return false;
-        }
-
         private void btnAjouterLoc_Click(object sender, EventArgs e)
         {
             InitialiserLabel(); // Appel de la méthode InitialiserLabel
