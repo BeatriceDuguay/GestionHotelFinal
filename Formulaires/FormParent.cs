@@ -208,7 +208,7 @@ namespace GestionHotel
                     {
                         if (elt.TypeEmploye == "Réceptionniste") // Si l'employé est du type "Réceptionniste" 
                         {
-                            // Rendre les ToolStripMenuItem accessibles (sauf celui qui permet d'accéder aux statistiques)
+                            // Rendre les ToolStripMenuItem accessibles (sauf ceux qui permettent d'accéder aux statistiques et à la manipulation de chambres)
                             clientToolStripMenuItem.Enabled = true;
                             locationToolStripMenuItem.Enabled = true;
                             chambreToolStripMenuItem.Enabled = false;
