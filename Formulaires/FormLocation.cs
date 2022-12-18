@@ -291,6 +291,7 @@ namespace GestionHotel.Formulaires
                             // Si la méthode VerifierNumLoc retourne true
                             if (VerifierNumLoc())
                             {
+                                // CODE DE : https://stackoverflow.com/a/10760541
                                 int nbPersonnes = Convert.ToInt32(numericNbAdultes.Value) + Convert.ToInt32(numericNbEnfants.Value); // Calculer le nombre de personnes dans la location
                                 if (elt1.NombreLits == 1 & nbPersonnes >= 1 & nbPersonnes <= 2 | // Si le nombre de lits de l'espace choisi a une valeur de 1 et que le nombre total de personnes dans la location
                                                                                                  // a une valeur plus grande ou égale à 1 et une valeur plus petite ou égale à 2 OU
@@ -371,6 +372,7 @@ namespace GestionHotel.Formulaires
                                 // Si le numéro du client et le numéro de l'espace entrés par l'utilisateur sont les mêmes que ceux dans la liste
                                 if (elt1.NumeroClient == txtNumClient.Text & elt2.NumeroEspace == txtNumEspace.Text)
                                 {
+                                    // CODE DE : https://stackoverflow.com/a/10760541
                                     int nbPersonnes = Convert.ToInt32(numericNbAdultes.Value) + Convert.ToInt32(numericNbEnfants.Value); // Calculer le nombre de personnes dans la location
                                     if (elt2.NombreLits == 1 & nbPersonnes >= 1 & nbPersonnes <= 2 | // Si le nombre de lits de l'espace choisi a une valeur de 1 et que le nombre total de personnes dans la location
                                                                                                      // a une valeur plus grande ou égale à 1 et une valeur plus petite ou égale à 2 OU
