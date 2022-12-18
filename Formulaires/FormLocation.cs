@@ -207,13 +207,14 @@ namespace GestionHotel.Formulaires
         ///     false si la date DateTimePicker du début de la location est plus petite que la date d'aujourd'hui
         ///     false si la location n'est pas d'une durée minimale de 1 jour et maximal de 28 jours
         /// </returns>
+        // Code de Hasna Hocini (GestElection)
         public bool VerifierDuree(DateTimePicker dtpickerDebut, Label lb1, Label lb2)
         {
             // Instancier un objet test Location pour accéder à la méthode DureeSejour
             Location test = new Location();
 
             // Si la date DateTimePicker du début de la location est plus petite que la date d'aujourd'hui
-            if (dtpickerDebut.Value.Date < DateTime.Now)
+            if (dtpickerDebut.Value.Date < DateTime.Now.Date)
             {
                 lb1.ForeColor = Color.Red;
                 lb1.Text = "Date indisponible"; // Afficher un message d'erreur

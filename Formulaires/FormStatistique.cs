@@ -55,7 +55,7 @@ namespace GestionHotel.Formulaires
         private void FormStatistique_Load(object sender, EventArgs e)
         {
             // Initialiser le Label du nombre de clients
-            lblNbClientsEspaceShow.Text = "";
+            lblNbLocDateEspShow.Text = "";
 
             // Ajouter des valeurs au ComboBox
             cboTypeEspace.Items.Add("Tous");
@@ -68,6 +68,10 @@ namespace GestionHotel.Formulaires
 
             // Mettre les ComboBox au premier index
             cboTypeEspace.SelectedIndex = 0;
+
+            // Appel de la fonction NombreLocations
+            string nombreLocation = StatistiquesHotel.NombreLocations().ToString();
+            lblNbLocationShow.Text = nombreLocation;
         }
 
         private void btnAfficherLocations_Click(object sender, EventArgs e)
@@ -88,7 +92,7 @@ namespace GestionHotel.Formulaires
                     // Appel de la fonction LocationParDate et la transformer en string
                     string s = StatistiquesHotel.LocationParDate(cboTypeEspace.Text, dtDateLocation).ToString();
                     // Afficher le nombre de locations
-                    lblNbClientsEspaceShow.Text = s;
+                    lblNbLocDateEspShow.Text = s;
                 }
 
                 // Si le type d'espace sélectionnée dans le ComboBox est "Tous"
@@ -101,13 +105,13 @@ namespace GestionHotel.Formulaires
                     // Appel de la fonction LocationParDate et la transformer en string
                     string s = StatistiquesHotel.LocationParDate(cboTypeEspace.Text, dtDateLocation).ToString();
                     // Afficher le nombre de locations
-                    lblNbClientsEspaceShow.Text = s;
+                    lblNbLocDateEspShow.Text = s;
                 }
             }
             // Appel de la fonction LocationParDate et la transformer en string
             string str = StatistiquesHotel.LocationParDate(cboTypeEspace.Text, dtDateLocation).ToString();
             // Afficher le nombre de locations
-            lblNbClientsEspaceShow.Text = str;
+            lblNbLocDateEspShow.Text = str;
         }
     }
 }

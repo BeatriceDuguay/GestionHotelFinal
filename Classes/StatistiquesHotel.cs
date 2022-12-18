@@ -47,15 +47,37 @@ namespace GestionHotel.Classes
             listeLocations = new List<Location>();
         }
 
+        //Méthode NombreLocations
+        /// <summary>
+        /// Calcule le nombre total de locations   
+        /// </summary>
+        /// <returns>
+        ///     Le nombre total de locations
+        /// </returns>
+        // Code de Hasna Hocini (GestElection)
+        public static int NombreLocations()
+        {
+            int cpt = 0; // Créer une variable pour compter le nombre de locations
+
+            // Parcourir la liste des locations
+            foreach (Location elt in ListeLocations)
+            {
+                cpt++; // Incrémenter le compteur
+            }
+
+            return cpt; // Retourner le nombre total de locations
+        }
+
         // Méthode LocationParDate
         /// <summary>
-        /// Affiche le nombre de location par espace et par date
+        /// Calcule le nombre de location par espace et par date
         /// </summary>
         /// <param name="typeEspace" Le type d'espace de l'espace></param>
         /// <param name="dtPickerDate" Le DateTimePicker de la date de location></param>
         /// <returns>
         ///     Le nombre de location par espace et par date
         /// </returns>
+        // Code de Hasna Hocini (GestElection)
         public static int LocationParDate(string typeEspace, DateTimePicker dtPickerDate)
         {
             int cpt = 0; // Créer une variable pour compter le nombre de locations
