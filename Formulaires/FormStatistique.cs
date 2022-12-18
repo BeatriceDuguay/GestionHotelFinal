@@ -90,7 +90,7 @@ namespace GestionHotel.Formulaires
                     // Appel de la méthode AfficherLocation
                     AfficherLocations(elt);
                     // Appel de la fonction LocationParDate et la transformer en string
-                    string s = StatistiquesHotel.LocationParDate(cboTypeEspace.Text, dtDateLocation).ToString();
+                    string s = StatistiquesHotel.LocationEspaceDate(cboTypeEspace.Text, dtDateLocation).ToString();
                     // Afficher le nombre de locations
                     lblNbLocDateEspShow.Text = s;
                 }
@@ -103,13 +103,13 @@ namespace GestionHotel.Formulaires
                     // Appel de la méthode AfficherLocation
                     AfficherLocations(elt);
                     // Appel de la fonction LocationParDate et la transformer en string
-                    string s = StatistiquesHotel.LocationParDate(cboTypeEspace.Text, dtDateLocation).ToString();
+                    string s = StatistiquesHotel.LocationEspaceDate(cboTypeEspace.Text, dtDateLocation).ToString();
                     // Afficher le nombre de locations
                     lblNbLocDateEspShow.Text = s;
                 }
             }
             // Appel de la fonction LocationParDate et la transformer en string
-            string str = StatistiquesHotel.LocationParDate(cboTypeEspace.Text, dtDateLocation).ToString();
+            string str = StatistiquesHotel.LocationEspaceDate(cboTypeEspace.Text, dtDateLocation).ToString();
             // Afficher le nombre de locations
             lblNbLocDateEspShow.Text = str;
         }

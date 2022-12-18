@@ -68,7 +68,7 @@ namespace GestionHotel.Classes
             return cpt; // Retourner le nombre total de locations
         }
 
-        // Méthode statique LocationParDate
+        // Méthode statique LocationEspaceDate
         /// <summary>
         /// Calcule le nombre de location par espace et par date
         /// </summary>
@@ -78,7 +78,7 @@ namespace GestionHotel.Classes
         ///     Le nombre de location par espace et par date
         /// </returns>
         // Code de Hasna Hocini (GestElection)
-        public static int LocationParDate(string typeEspace, DateTimePicker dtPickerDate)
+        public static int LocationEspaceDate(string typeEspace, DateTimePicker dtPickerDate)
         {
             int cpt = 0; // Créer une variable pour compter le nombre de locations
 
