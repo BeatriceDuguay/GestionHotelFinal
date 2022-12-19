@@ -1,5 +1,6 @@
 ﻿using GestionHotel.Classes;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -176,24 +177,61 @@ namespace GestionHotel.Formulaires
 
         private void btnAjouterClient_Click(object sender, EventArgs e)
         {
-            if (VerifierTous()) // Si la méthode VerifierTous retourne true
+            // Ajouter un bloc Try catch pour intercepter l’exception violation de contrainte PRIMARY KEY
+            try
             {
-                // Instancier un objet Client avec les champs entrés par l'utilisateur
-                Client client = new Client(txtNumClient.Text, txtPrenom.Text, txtNom.Text, dtDateNaissance.Value.Date,
-                                           txtTelephone.Text);
-                if (VerifierNum())
+                if (VerifierTous()) // Si la méthode VerifierTous retourne true
                 {
-                    // Ajouter le nouveau client à la liste des clients de la classe statique StatistiquesHotel
-                    StatistiquesHotel.ListeClients.Add(client);
+                    // Instancier un objet Client avec les champs entrés par l'utilisateur
+                    Client client = new Client(txtNumClient.Text, txtPrenom.Text, txtNom.Text, dtDateNaissance.Value.Date,
+                                               txtTelephone.Text);
 
-                    // Appel de la méthode InitialiserControles
-                    InitialiserControles();
-                    // Appel de la méthode InitialiserLabel
-                    InitialiserLabel();
+                    // Code de Hasna Hocini (Laboratoire_Mode_Connecte)
+                    // Configurer la connection avec la base de données
+                    String connectionString = ConfigurationManager.ConnectionStrings["cnxSqlServer"].ConnectionString;
 
-                    // Afficher les informations du client dans une boîte de message en appelant la méthode AfficherClient
-                    MessageBox.Show(client.AfficherClient(), "Client ajouté");
+                    SqlConnection cnx = new SqlConnection();
+                    cnx.ConnectionString = connectionString;
+
+                    string Query = "INSERT INTO Client (numeroClient, prenom, nom, dateNaiss, numTelephone) VALUES ("
+                    + txtNumClient.Text.Trim() + ",'" + txtPrenom.Text.Trim() + "" + "','" + txtNom.Text.Trim() +
+                    "" + "','" + dtDateNaissance.Value.ToString() + "" + "','" + txtTelephone.Text.Trim() + "');";
+
+                    SqlCommand command = new SqlCommand(Query, cnx);
+
+                    // Mettre La requête dans la propriété CommanText de l’objet command
+                    command.CommandText = Query;
+
+                    // Rétablir la connexion avec le serveur si elle a été fermée
+                    if (cnx.State == ConnectionState.Open) // ConnectionState dans System.Data
+                    {
+                        cnx.Close(); // Fermer la connexion
+                    }
+                    cnx.Open(); // Ouvrir la connexion
+
+                    // Executer la commande INSERT
+                    int nombreLignes = command.ExecuteNonQuery();
+                    MessageBox.Show(nombreLignes + "ligne(s) affectée(s)");
+                    cnx.Close(); // Fermer la connexion
+
+                    if (VerifierNum())
+                    {
+                        // Ajouter le nouveau client à la liste des clients de la classe statique StatistiquesHotel
+                        StatistiquesHotel.ListeClients.Add(client);
+
+                        // Appel de la méthode InitialiserControles
+                        InitialiserControles();
+                        // Appel de la méthode InitialiserLabel
+                        InitialiserLabel();
+
+                        // Afficher les informations du client dans une boîte de message en appelant la méthode AfficherClient
+                        MessageBox.Show(client.AfficherClient(), "Client ajouté");
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erreur"); // Ajouter un message d'erreur
             }
         }
 
@@ -229,10 +267,11 @@ namespace GestionHotel.Formulaires
                                                    txtTelephone.Text);
 
                         // Supprimer le client de la liste
-                        StatistiquesHotel.ListeClients.Remove(elt);
+                        StatistiquesHotel.ListeClients.Remove(elt);                       
 
                         // Ajouter les nouvelles informations du client à la liste
                         AjouterClient(client);
+
                         // Appel de la méthode InitialiserControles
                         InitialiserControles();
                         // Appel de la méthode InitialiserLabel
