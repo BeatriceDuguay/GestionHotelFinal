@@ -254,6 +254,9 @@ namespace GestionHotel.Formulaires
 
         private void btnModifierClient_Click(object sender, EventArgs e)
         {
+            // Créer une variable bouléenne qui indique si le client a été trouvé dans la liste des clients
+            bool trouve = false;
+
             if (VerifierTous()) // Si la méthode VerifierTous retourne true
             {
                 // Parcourir la liste des clients
@@ -262,6 +265,8 @@ namespace GestionHotel.Formulaires
                     // Si le numéro du client entré par l'utilisateur existe dans la liste
                     if (elt.NumeroClient == txtNumClient.Text)
                     {
+                        trouve = true; // La variable trouve est true
+
                         // Instancier un objet Client avec les champs entrés par l'utilisateur
                         Client client = new Client(txtNumClient.Text, txtPrenom.Text, txtNom.Text, dtDateNaissance.Value.Date,
                                                    txtTelephone.Text);
@@ -282,8 +287,11 @@ namespace GestionHotel.Formulaires
                         break; // Arrêter de parcourir la liste
                     }
 
-                    else MessageBox.Show("Client Inexistant", "Message"); // Sinon afficher message d'erreur
+                    
                 }
+                if (trouve == false) // Si la variable trouve est false
+                    MessageBox.Show("Client inexistant", "Message"); // Afficher message d'erreur
+
             }
         }
 
@@ -309,6 +317,9 @@ namespace GestionHotel.Formulaires
 
         private void btnSupprimerClient_Click(object sender, EventArgs e)
         {
+            // Créer une variable bouléenne qui indique si le client a été trouvé dans la liste des clients
+            bool trouve = false;
+
             if (VerifierNumero()) // Si la méthode VerifierNumero retourne true
             {
                 // Parcourir la liste des clients
@@ -317,6 +328,8 @@ namespace GestionHotel.Formulaires
                     // Si le numéro du client entré par l'utilisateur existe dans la liste
                     if (elt.NumeroClient == txtNumClient.Text)
                     {
+                        trouve = true; // La variable trouve est true
+
                         // Supprimer le client de la liste
                         StatistiquesHotel.ListeClients.Remove(elt);
 
@@ -329,9 +342,9 @@ namespace GestionHotel.Formulaires
                         MessageBox.Show("Le client a bien été supprimé.", "Client supprimé");
                         break; // Arrêter de parcourir la liste
                     }
-
-                    else MessageBox.Show("Client inexistant ", "Message"); // Sinon afficher un message d'erreur
                 }
+                if (trouve == false) // Si la variable trouve est false
+                    MessageBox.Show("Client inexistant", "Message"); // Afficher message d'erreur
             }
         }
     }

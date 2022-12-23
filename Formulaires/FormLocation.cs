@@ -61,6 +61,7 @@ namespace GestionHotel.Formulaires
             numericNbEnfants.Value = 0;
         }
 
+        // Méthode Verifier Regex
         /// <summary>
         /// Vérifier le Regex 
         /// </summary>
@@ -92,6 +93,7 @@ namespace GestionHotel.Formulaires
             return true;
         }
 
+        // Méthode VerifierTous
         /// <summary>
         /// Vérifie que toutes les méthodes booléennes retourne true
         /// </summary>
@@ -103,7 +105,7 @@ namespace GestionHotel.Formulaires
         public bool VerifierTous()
         {
             // Déclaration des booléens de validation des informations entrées
-            bool b_numLoc, b_numClient, b_numChambre, b_duree, b_dispo;
+            bool b_numLoc, b_numClient, b_numChambre, b_duree;
 
             // Appel de la méthode VerifierRegex pour tous les champs et récupération des valeurs retournées dans les variables bouléennes
             b_numClient = VerifierRegex("^[0-9]{5}$", txtNumClient, lblErreurNumClient, "Cinq chiffres");
@@ -113,11 +115,31 @@ namespace GestionHotel.Formulaires
             // Appel de la métode VerifierDuree pour vérifier la durée de la location
             b_duree = VerifierDuree(dtDebutLocation, lblErreurDebutLoc, lblErreurFinLoc);
 
+            // Si toutes les vérifications sont valides retourner vrai
+            if (b_numLoc && b_numClient && b_numChambre && b_duree)
+                return true; // Retourner true
+            else return false; // Sinon retourner false
+        }
+
+        // Méthode VerifierMethodeDispo
+        /// <summary>
+        /// Vérifie que la méthode booléenne retourne true
+        /// </summary>
+        /// <returns>
+        ///     true si toutes les informations entrées par l'utilisateur sont valides
+        ///     false si toutes les informations entrées par l'utilisateur sont invalides
+        /// </returns>
+        // Code de Hasna Hocini (GestElection)
+        public bool VerifierMethodeDispo()
+        {
+            // Déclaration du booléen de validation de l'information entrée
+            bool b_dispo;
+
             // Appel de la méthode VerifierDispo pour vérifier si l'espace est disponible
             b_dispo = VerifierDispo(dtDebutLocation, dtFinLocation, lblErreurNumEspace);
 
-            // Si toutes les vérifications sont valides retourner vrai
-            if (b_numLoc && b_numClient && b_numChambre && b_duree && b_dispo)
+            // Si la vérification est valide retourner vrai
+            if (b_dispo)
                 return true; // Retourner true
             else return false; // Sinon retourner false
         }
@@ -144,54 +166,6 @@ namespace GestionHotel.Formulaires
                 }
             }
             return true; // Retourner true si la location n'est pas dans la liste
-        }
-
-        // Méthode VerifierNumClient()
-        /// <summary>
-        /// Vérifie que le client entré par l'utilisateur se trouve dans la liste des clients
-        /// </summary>
-        /// <returns>
-        ///     false si le client ne se trouve pas dans la liste
-        ///     true si le client se trouve dans la liste
-        /// </returns>
-        // Code de Hasna Hocini (GestElection)
-        public bool VerifierNumClient()
-        {
-            // Parcourir la liste des clients
-            foreach (Client client in StatistiquesHotel.ListeClients)
-            {
-                // Si le numéro du client entré par l'utilisateur est le même que celui dans la liste
-                if (client.NumeroClient == txtNumClient.Text)
-                {
-                    return true; // Retourner true 
-                }
-            }
-            MessageBox.Show("Le client ou l'espace n'existe pas. ", "Message"); // Afficher un message d'erreur
-            return false; // Retourner false si le client n'est pas dans la liste
-        }
-
-        // Méthode VerifierNumEspace()
-        /// <summary>
-        /// Vérifie que l'espace entré par l'utilisateur se trouve dans la liste des espaces
-        /// </summary>
-        /// <returns>
-        ///     false si l'espace ne se trouve pas dans la liste
-        ///     true si l'espace se trouve dans la liste
-        /// </returns>
-        // Code de Hasna Hocini (GestElection)
-        public bool VerifierNumEspace()
-        {
-            // Parcourir la liste des espace
-            foreach (EspaceLoue espace in StatistiquesHotel.ListeEspaceLoue)
-            {
-                // Si le numéro de l'espace entré par l'utilisateur est le même que celui dans la liste
-                if (espace.NumeroEspace == txtNumEspace.Text)
-                {
-                    return true; // Retourner true 
-                }
-            }
-            MessageBox.Show("Le client ou l'espace n'existe pas. ", "Message"); // Afficher un message d'erreur
-            return false; // Retourner false si l'espace n'est pas dans la liste
         }
 
         // Méthode VerifierDuree()
@@ -264,64 +238,96 @@ namespace GestionHotel.Formulaires
 
         private void btnAjouterLoc_Click(object sender, EventArgs e)
         {
+            // Créer une variable bouléenne qui indique si le client a été trouvé dans la liste des clients
+            bool trouve = false;
+
             InitialiserLabel(); // Appel de la méthode InitialiserLabel
+
             // Si les méthodes VerifierTous, VerifierNumClient et VerifierNumEspace retournent true
-            if (VerifierTous()) 
+            if (VerifierTous())
             {
-                // Parcourir la liste des clients
-                foreach (Client elt in StatistiquesHotel.ListeClients)
+                // Si la méthode VerifierNumLoc retourne true
+                if (VerifierNumLoc())
                 {
-                    // Parcourir la liste des espaces
-                    foreach (EspaceLoue elt1 in StatistiquesHotel.ListeEspaceLoue)
+                    // Parcourir la liste des clients
+                    foreach (Client elt1 in StatistiquesHotel.ListeClients)
                     {
-                        // Si le numéro du client et le numéro de l'espace entrés par l'utilisateur sont les mêmes que ceux dans la liste
-                        if (elt.NumeroClient == txtNumClient.Text & elt1.NumeroEspace == txtNumEspace.Text)
+                        trouve = false; // Remettre la varaible trouve à false
+
+                        // Si le numéro du client entré par l'utilisateur existe dans la liste
+                        if (elt1.NumeroClient == txtNumClient.Text)
                         {
-                            // Instancier un objet test Location pour accéder à la méthode DureeSejour
-                            Location test = new Location();
+                            trouve = true; // La variable trouve est true
 
-                            // Appel de la méthode DureeSejour
-                            int dureeSejour = test.DureeSejour(dtDebutLocation, dtFinLocation);
-
-                            // Instancier un objet Location avec les champs entrés par l'utilisateur
-                            Location location = new Location(txtNumLocation.Text, dtDebutLocation.Value.Date,
-                                                             dtFinLocation.Value.Date, dureeSejour, (int)numericNbAdultes.Value,
-                                                             (int)numericNbEnfants.Value, elt, elt1);
-
-                            // Si la méthode VerifierNumLoc retourne true
-                            if (VerifierNumLoc())
+                            // Parcourir la liste des espaces
+                            foreach (EspaceLoue elt2 in StatistiquesHotel.ListeEspaceLoue)
                             {
-                                // CODE DE : https://stackoverflow.com/a/10760541
-                                int nbPersonnes = Convert.ToInt32(numericNbAdultes.Value) + Convert.ToInt32(numericNbEnfants.Value); // Calculer le nombre de personnes dans la location
-                                if (elt1.NombreLits == 1 & nbPersonnes >= 1 & nbPersonnes <= 2 | // Si le nombre de lits de l'espace choisi a une valeur de 1 et que le nombre total de personnes dans la location
-                                                                                                 // a une valeur plus grande ou égale à 1 et une valeur plus petite ou égale à 2 OU
-                                    elt1.NombreLits == 2 & nbPersonnes >= 1 & nbPersonnes <= 4 | // Si le nombre de lits de l'espace choisi a une valeur de 2 et que le nombre total de personnes dans la location
-                                                                                                 // a une valeur plus grande ou égale à 1 et une valeur plus petite ou égale à 4 OU
-                                    elt1.NombreLits == 3 & nbPersonnes >= 1 & nbPersonnes <= 6)  // Si le nombre de lits de l'espace choisi a une valeur de 3 et que le nombre total de personnes dans la location
-                                                                                                 // a une valeur plus grande ou égale à 1 et une valeur plus petite ou égale à 6
-                                {
-                                    // Ajouter la nouvelle location à la liste des locations de la classe statique StatistiquesHotel
-                                    StatistiquesHotel.ListeLocations.Add(location);
+                                trouve = false; // Remettre la varaible trouve à false
 
-                                    // Afficher les informations de la chambre dans une boîte de message
-                                    MessageBox.Show(location.AfficherLocation() + "\n" +
-                                                    elt.AfficherClient() + "\n" + "\n" +
-                                                    elt1.AfficherEspace(), "Location ajoutée");
-
-                                    // Appel de la méthode InitialiserControles
-                                    InitialiserControles();
-                                    // Appel de la méthode InitialiserLabel
-                                    InitialiserLabel();
-                                    break; // Arrêter de parcourir la liste
-                                }
-                                else
+                                // Si le numéro de l'espace entré par l'utilisateur existe dans la liste
+                                if (elt2.NumeroEspace == txtNumEspace.Text)
                                 {
-                                    lblErreurNbEnfants.ForeColor = Color.Red;
-                                    lblErreurNbEnfants.Text = "Nombre maximal de personnes dépassé"; // Afficher un message d'erreur
+                                    // CODE DE : https://stackoverflow.com/a/10760541
+                                    int nbPersonnes = Convert.ToInt32(numericNbAdultes.Value) + Convert.ToInt32(numericNbEnfants.Value); // Calculer le nombre de personnes dans la location
+                                    if (elt2.NombreLits == 1 & nbPersonnes >= 1 & nbPersonnes <= 2 | // Si le nombre de lits de l'espace choisi a une valeur de 1 et que le nombre total de personnes dans la location
+                                                                                                        // a une valeur plus grande ou égale à 1 et une valeur plus petite ou égale à 2 OU
+                                        elt2.NombreLits == 2 & nbPersonnes >= 1 & nbPersonnes <= 4 | // Si le nombre de lits de l'espace choisi a une valeur de 2 et que le nombre total de personnes dans la location
+                                                                                                        // a une valeur plus grande ou égale à 1 et une valeur plus petite ou égale à 4 OU
+                                        elt2.NombreLits == 3 & nbPersonnes >= 1 & nbPersonnes <= 6)  // Si le nombre de lits de l'espace choisi a une valeur de 3 et que le nombre total de personnes dans la location
+                                                                                                        // a une valeur plus grande ou égale à 1 et une valeur plus petite ou égale à 6
+                                                                                                        // Instancier un objet test Location pour accéder à la méthode DureeSejour
+                                    {
+
+                                        trouve = true; // La variable trouve est true
+
+                                        Location test = new Location();
+
+                                        // Appel de la méthode DureeSejour
+                                        int dureeSejour = test.DureeSejour(dtDebutLocation, dtFinLocation);
+
+                                        // Si la méthode VerifierMethodeDispo retourne true
+                                        if (VerifierMethodeDispo())
+                                        {
+                                            // Instancier un objet Location avec les champs entrés par l'utilisateur
+                                            Location location = new Location(txtNumLocation.Text, dtDebutLocation.Value.Date,
+                                                                            dtFinLocation.Value.Date, dureeSejour, (int)numericNbAdultes.Value,
+                                                                            (int)numericNbEnfants.Value, elt1, elt2);
+
+                                            // Ajouter la nouvelle location à la liste des locations de la classe statique StatistiquesHotel
+                                            StatistiquesHotel.ListeLocations.Add(location);
+
+                                            // Appel de la méthode InitialiserControles
+                                            InitialiserControles();
+                                            // Appel de la méthode InitialiserLabel
+                                            InitialiserLabel();
+
+                                            // Afficher les nouvelles informations de la chambre dans une boîte de message
+                                            MessageBox.Show(location.AfficherLocation() + "\n" +
+                                                            elt1.AfficherClient() + "\n" + "\n" +
+                                                            elt2.AfficherEspace(), "Location ajoutée");
+                                            break; // Arrêter de parcourir la liste
+                                        }
+
+                                    }
+
+                                    else
+                                    {
+                                        lblErreurNbEnfants.ForeColor = Color.Red;
+                                        lblErreurNbEnfants.Text = "Nombre maximal de personnes dépassé"; // Afficher un message d'erreur
+                                    }
                                 }
                             }
-                            break; // Arrêter de parcourir la liste
+                            if (trouve == false) // Si la variable trouve est false
+                            {
+                                MessageBox.Show("Espace inexistant", "Message"); // Afficher message d'erreur  
+                                trouve = true; // Remettre la varaible trouve à true
+                                break; // Arrêter de parcourir la liste
+                            }
                         }
+                    }
+                    if (trouve == false) // Si la variable trouve est false
+                    {
+                        MessageBox.Show("Client Inexistant", "Message"); // Afficher message d'erreur
                     }
                 }
             }
@@ -353,7 +359,11 @@ namespace GestionHotel.Formulaires
 
         private void btnModifierLoc_Click(object sender, EventArgs e)
         {
+            // Créer une variable bouléenne qui indique si le client a été trouvé dans la liste des clients
+            bool trouve = false;
+
             InitialiserLabel(); // Appel de la méthode InitialiserLabel
+
             // Si les méthodes VerifierTous, VerifierNumClient et VerifierNumEspace retournent true
             if (VerifierTous())
             {
@@ -363,72 +373,112 @@ namespace GestionHotel.Formulaires
                     // Si le numéro de la location entré par l'utilisateur existe dans la liste
                     if (elt.NumeroLocation == txtNumLocation.Text)
                     {
+                        trouve = true; // La variable trouve est true
+
                         // Parcourir la liste des clients
                         foreach (Client elt1 in StatistiquesHotel.ListeClients)
                         {
-                            // Parcourir la liste des espaces
-                            foreach (EspaceLoue elt2 in StatistiquesHotel.ListeEspaceLoue)
+                            trouve = false; // Remettre la varaible trouve à false
+
+                            // Si le numéro du client entré par l'utilisateur existe dans la liste
+                            if (elt1.NumeroClient == txtNumClient.Text)
                             {
-                                // Si le numéro du client et le numéro de l'espace entrés par l'utilisateur sont les mêmes que ceux dans la liste
-                                if (elt1.NumeroClient == txtNumClient.Text & elt2.NumeroEspace == txtNumEspace.Text)
+                                trouve = true; // La variable trouve est true
+
+                                // Parcourir la liste des espaces
+                                foreach (EspaceLoue elt2 in StatistiquesHotel.ListeEspaceLoue)
                                 {
-                                    // CODE DE : https://stackoverflow.com/a/10760541
-                                    int nbPersonnes = Convert.ToInt32(numericNbAdultes.Value) + Convert.ToInt32(numericNbEnfants.Value); // Calculer le nombre de personnes dans la location
-                                    if (elt2.NombreLits == 1 & nbPersonnes >= 1 & nbPersonnes <= 2 | // Si le nombre de lits de l'espace choisi a une valeur de 1 et que le nombre total de personnes dans la location
-                                                                                                     // a une valeur plus grande ou égale à 1 et une valeur plus petite ou égale à 2 OU
-                                        elt2.NombreLits == 2 & nbPersonnes >= 1 & nbPersonnes <= 4 | // Si le nombre de lits de l'espace choisi a une valeur de 2 et que le nombre total de personnes dans la location
-                                                                                                     // a une valeur plus grande ou égale à 1 et une valeur plus petite ou égale à 4 OU
-                                        elt2.NombreLits == 3 & nbPersonnes >= 1 & nbPersonnes <= 6)  // Si le nombre de lits de l'espace choisi a une valeur de 3 et que le nombre total de personnes dans la location
-                                                                                                     // a une valeur plus grande ou égale à 1 et une valeur plus petite ou égale à 6
-                                                                                                     // Instancier un objet test Location pour accéder à la méthode DureeSejour
+                                    trouve = false; // Remettre la varaible trouve à false
+
+                                    // Si le numéro de l'espace entré par l'utilisateur existe dans la liste
+                                    if (elt2.NumeroEspace == txtNumEspace.Text)
                                     {
-                                        Location test = new Location();
+                                        // CODE DE : https://stackoverflow.com/a/10760541
+                                        int nbPersonnes = Convert.ToInt32(numericNbAdultes.Value) + Convert.ToInt32(numericNbEnfants.Value); // Calculer le nombre de personnes dans la location
+                                        if (elt2.NombreLits == 1 & nbPersonnes >= 1 & nbPersonnes <= 2 | // Si le nombre de lits de l'espace choisi a une valeur de 1 et que le nombre total de personnes dans la location
+                                                                                                         // a une valeur plus grande ou égale à 1 et une valeur plus petite ou égale à 2 OU
+                                            elt2.NombreLits == 2 & nbPersonnes >= 1 & nbPersonnes <= 4 | // Si le nombre de lits de l'espace choisi a une valeur de 2 et que le nombre total de personnes dans la location
+                                                                                                         // a une valeur plus grande ou égale à 1 et une valeur plus petite ou égale à 4 OU
+                                            elt2.NombreLits == 3 & nbPersonnes >= 1 & nbPersonnes <= 6)  // Si le nombre de lits de l'espace choisi a une valeur de 3 et que le nombre total de personnes dans la location
+                                                                                                         // a une valeur plus grande ou égale à 1 et une valeur plus petite ou égale à 6
+                                                                                                         // Instancier un objet test Location pour accéder à la méthode DureeSejour
+                                        {
+                                            
+                                            trouve = true; // La variable trouve est true
 
-                                        // Appel de la méthode DureeSejour
-                                        int dureeSejour = test.DureeSejour(dtDebutLocation, dtFinLocation);
+                                            Location test = new Location();
 
-                                        // Supprimer l'élément de la liste 
-                                        StatistiquesHotel.ListeLocations.Remove(elt);
+                                            // Appel de la méthode DureeSejour
+                                            int dureeSejour = test.DureeSejour(dtDebutLocation, dtFinLocation);
 
-                                        // Instancier un objet Location avec les champs entrés par l'utilisateur
-                                        Location location = new Location(txtNumLocation.Text, dtDebutLocation.Value.Date,
-                                                                         dtFinLocation.Value.Date, dureeSejour, (int)numericNbAdultes.Value,
-                                                                         (int)numericNbEnfants.Value, elt1, elt2);
+                                            // Supprimer l'élément de la liste 
+                                            StatistiquesHotel.ListeLocations.Remove(elt);
 
-                                        // Ajouter la nouvelle location à la liste des locations de la classe statique StatistiquesHotel
-                                        StatistiquesHotel.ListeLocations.Add(location);
+                                            // Si la méthode VerifierMethodeDispo retourne true
+                                            if (VerifierMethodeDispo())
+                                            {
+                                                // Instancier un objet Location avec les champs entrés par l'utilisateur
+                                                Location location = new Location(txtNumLocation.Text, dtDebutLocation.Value.Date,
+                                                                                dtFinLocation.Value.Date, dureeSejour, (int)numericNbAdultes.Value,
+                                                                                (int)numericNbEnfants.Value, elt1, elt2);
 
-                                        // Appel de la méthode InitialiserControles
-                                        InitialiserControles();
-                                        // Appel de la méthode InitialiserLabel
-                                        InitialiserLabel();
+                                                // Ajouter la nouvelle location à la liste des locations de la classe statique StatistiquesHotel
+                                                StatistiquesHotel.ListeLocations.Add(location);
 
-                                        // Afficher les nouvelles informations de la chambre dans une boîte de message
-                                        MessageBox.Show(location.AfficherLocation() + "\n" +
-                                                        elt1.AfficherClient() + "\n" + "\n" +
-                                                        elt2.AfficherEspace(), "Location ajoutée");
-                                        break; // Arrêter de parcourir les listes
-                                    }
-                                    else
-                                    {
-                                        lblErreurNbEnfants.ForeColor = Color.Red;
-                                        lblErreurNbEnfants.Text = "Nombre maximal de personnes dépassé"; // Afficher un message d'erreur
+                                                // Appel de la méthode InitialiserControles
+                                                InitialiserControles();
+                                                // Appel de la méthode InitialiserLabel
+                                                InitialiserLabel();
+
+                                                // Afficher les nouvelles informations de la chambre dans une boîte de message
+                                                MessageBox.Show(location.AfficherLocation() + "\n" +
+                                                                elt1.AfficherClient() + "\n" + "\n" +
+                                                                elt2.AfficherEspace(), "Location modifiée");
+                                                break; // Arrêter de parcourir la liste
+                                            }
+                                            
+                                        }
+                                            
+                                        else
+                                        {
+                                            lblErreurNbEnfants.ForeColor = Color.Red;
+                                            lblErreurNbEnfants.Text = "Nombre maximal de personnes dépassé"; // Afficher un message d'erreur
+                                        }
                                     }
                                 }
+                                if (trouve == false) // Si la variable trouve est false
+                                {
+                                    MessageBox.Show("Espace inexistant", "Message"); // Afficher message d'erreur  
+                                    trouve = true; // Remettre la varaible trouve à true
+                                    break; // Arrêter de parcourir la liste
+                                }  
                             }
                         }
+                        if (trouve == false) // Si la variable trouve est false
+                        {
+                            MessageBox.Show("Client Inexistant", "Message"); // Afficher message d'erreur
+                            trouve = true; // Remettre la varaible trouve à true
+                            break;
+                        }
                     }
+                }
+                if (trouve == false) // Si la variable trouve est false 
+                {
+                    MessageBox.Show("Location inexistante", "Message"); // Afficher message d'erreur
                 }
             }
         }
 
         private void btnSupprimerLoc_Click(object sender, EventArgs e)
         {
+            // Créer une variable bouléenne qui indique si le client a été trouvé dans la liste des clients
+            bool trouve = false;
+
             // Parcourir la liste des locations
             foreach (Location elt in StatistiquesHotel.ListeLocations.ToList())
             {
                 // Si le numéro de la location entrée par l'utilisateur se trouve dans la liste 
-                if (elt.NumeroLocation == txtNumLocation.Text) 
+                if (elt.NumeroLocation == txtNumLocation.Text)
                 {
                     StatistiquesHotel.ListeLocations.Remove(elt); // Supprimer la location de la liste
 
@@ -441,12 +491,16 @@ namespace GestionHotel.Formulaires
                     MessageBox.Show("La location a bien été supprimée.", "Location supprimée");
 
                 }
-                MessageBox.Show("La location n'existe pas.", "Message"); // Afficher un message d'erreur
-            } 
+            }
+            if (trouve == false) // Si la variable trouve est false
+                MessageBox.Show("Location inexistante", "Message"); // Afficher message d'erreur
         }
 
         private void btnConsulterLoc_Click(object sender, EventArgs e)
         {
+            // Créer une variable bouléenne qui indique si le client a été trouvé dans la liste des clients
+            bool trouve = false;
+
             foreach (Location elt in StatistiquesHotel.ListeLocations.ToList())
             {
                 // Si le numéro de la location entrée par l'utilisateur se trouve dans la liste 
@@ -457,15 +511,12 @@ namespace GestionHotel.Formulaires
                     // Afficher les statistiques de la location
                     MessageBox.Show("Nombre de jours : " + elt.Duree + "\n" +
                                     "Nombre de personnes : " + nbPersonnes.ToString() + "\n" +
-                                    "Check-in : " + elt.DateDebutLocation.ToString() + " 15h" + "\n" + 
+                                    "Check-in : " + elt.DateDebutLocation.ToString() + " 15h" + "\n" +
                                     "Check-out : " + elt.DateFinLocation.ToString() + " 11h", "Consulter la location");
                 }
-
-                else
-                {
-                    MessageBox.Show("La location n'existe pas.", "Message"); // Afficher un message d'erreur
-                }
             }
+            if (trouve == false) // Si la variable trouve est false
+                MessageBox.Show("Client inexistante", "Message"); // Afficher message d'erreur
         }
     }
 }
